@@ -320,6 +320,41 @@
   .hl-card{border-color:#5b4580;background:linear-gradient(160deg,rgba(168,85,247,.12),rgba(24,24,24,1) 55%)}
   @media (max-width:760px){.bn{grid-template-columns:1fr}.bn-arrow{transform:rotate(90deg);animation:none}}
 
+  /* search case: main + accordion */
+  .grid4.two{grid-template-columns:repeat(2,1fr)}
+  .nowbuild.main{padding:20px 22px;margin-top:22px}
+  .nowbuild.main b{font-size:20px}
+  .nb-note{margin-top:10px;font-size:12px;color:var(--muted)}
+  .bn-after .sm{font-size:11px;color:var(--muted)}
+  .acc-wrap{grid-column:1 / -1;border-top:1px solid var(--line);padding:30px 44px 36px;background:rgba(255,255,255,.012)}
+  .acc-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+  .acc-head b{color:#fff;font-size:18px}
+  .acc-head small{font-size:12px;color:var(--muted)}
+  .acc{display:grid;gap:8px}
+  .acc-item{border:1px solid var(--line2);border-radius:14px;background:rgba(18,18,18,.55);transition:border-color .3s,background .3s;overflow:hidden}
+  .acc-item:hover{border-color:#4b3a66}
+  .acc-item[open]{border-color:#5b4580;background:linear-gradient(160deg,rgba(168,85,247,.08),rgba(18,18,18,.6) 60%)}
+  .acc-item summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto auto 22px;align-items:center;gap:16px;padding:15px 18px}
+  .acc-item summary::-webkit-details-marker{display:none}
+  .acc-t{color:#fff;font-weight:600;font-size:15.5px}
+  .acc-t em{font-style:normal;font-weight:500;font-size:12.5px;color:var(--muted);margin-left:8px}
+  .acc-d{font-size:12.5px;color:var(--muted)}
+  .acc-c{font-size:12.5px;font-weight:700;color:#fff;padding:4px 10px;border-radius:999px;background:rgba(168,85,247,.16);border:1px solid #4b3a66;white-space:nowrap}
+  .acc-c.live-c{background:rgba(236,72,153,.16);border-color:rgba(236,72,153,.4)}
+  .acc-i{width:22px;height:22px;position:relative}
+  .acc-i::before,.acc-i::after{content:"";position:absolute;left:5px;right:5px;top:10px;height:2px;border-radius:2px;background:var(--p1);transition:transform .35s var(--ease)}
+  .acc-i::after{transform:rotate(90deg)}
+  .acc-item[open] .acc-i::after{transform:rotate(0)}
+  .acc-body{padding:2px 18px 18px;animation:accIn .45s var(--ease)}
+  @keyframes accIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+  .acc-body p{font-size:14px;line-height:1.75;margin-top:10px}
+  .acc-body p b{color:#fff;font-weight:600;margin-right:6px}
+  .acc-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:14px}
+  .acc-kpis div{border:1px solid var(--line2);border-radius:12px;padding:12px 14px;background:rgba(18,18,18,.6)}
+  .acc-kpis b{display:block;color:#fff;font-size:20px;font-weight:800;letter-spacing:-.01em}
+  .acc-kpis span{display:block;font-size:12px;color:var(--muted);margin-top:3px;line-height:1.5}
+  @media (max-width:760px){.acc-wrap{padding:24px 18px}.acc-item summary{grid-template-columns:1fr 22px}.acc-d,.acc-c{display:none}.grid4.two{grid-template-columns:1fr}}
+
   footer{border-top:1px solid var(--line2);padding:28px 0;color:var(--muted);font-size:14px}
   footer .wrap{display:flex;justify-content:space-between;align-items:center}
   footer .logo{font-size:20px}
@@ -566,31 +601,21 @@
         </div>
       </article>
 
-      <article class="feature reveal" data-cat="bunjang">
+      <article class="feature search-case reveal" data-cat="bunjang build">
         <div class="f-info">
           <div class="f-tags"><span>Squad Lead</span><span>Raw Data</span><span>Search Quality</span></div>
           <h3>검색해도 못 찾던 커머스 검색,<br/>밑바닥부터 다시 세우다</h3>
-          <p class="one">절반 넘는 검색이 상품을 하나도 누르지 않고 끝났고, 결과가 0건인 검색도 30% 가까이 됐습니다. 로데이터와 지표를 전부 뜯어보며 문제를 찾고, 하나씩 고쳐 지금 수준까지 끌어올렸습니다. 지금도 계속 개선 중입니다.</p>
-          <div class="nowbuild">
-            <span class="nb-tag"><i></i>NOW BUILDING</span>
+          <p class="one">절반 넘는 검색이 상품을 하나도 누르지 않고 끝났고, 결과가 0건인 검색도 30% 가까이 됐습니다. 번역은 검색을 위한 번역이 아닌 직역이라, 언어마다 다르게 부르는 상품명이 하나도 연결돼 있지 않았습니다. 로데이터와 지표를 전부 뜯어보며 문제를 찾고 하나씩 고쳐 지금 수준까지 끌어올렸고, 지금도 계속 개선 중입니다.</p>
+          <div class="nowbuild main">
+            <span class="nb-tag"><i></i>MAIN · NOW BUILDING</span>
             <b>용어집·동의어 사전 자동화</b>
-            <p>검색 트렌드를 반영해 동의어, 파생어, 약어, 그리고 언어마다 다르게 부르는 같은 상품명을 자동으로 연결하는 사전을 직접 자동화로 만들고 있습니다.</p>
+            <p>못 찾는 검색의 근본 원인은 연결되지 않은 단어 하나였습니다. 검색 트렌드를 반영해 동의어, 파생어, 약어, 그리고 언어마다 다르게 부르는 같은 상품명을 자동으로 매핑하는 사전을 직접 자동화로 만들고 있습니다.</p>
             <div class="nb-map"><span>동의어</span><span>파생어</span><span>약어</span><span>언어별 명칭</span><em>→</em><span class="hl">같은 상품으로 자동 매핑</span></div>
+            <div class="nb-note">진행 중 · 성과 측정 전</div>
           </div>
-          <div class="more">
-            <div class="f-rows">
-              <div class="f-row"><b>문제</b><span>결과 0건인 검색이 30% 가까이, 결과가 있어도 상품을 누르지 않고 이탈. 번역이 ‘검색을 위한 번역’이 아니라 직역이라, 언어마다 다르게 부르는 상품명이 하나도 연결돼 있지 않아 유저가 헤맨 수밖에 없던 구조</span></div>
-              <div class="f-row"><b>한 것</b><span>검색 로그 8.4만 건을 직접 분류하고 지표를 처음부터 다시 뜯어봄. 특수문자 허용, 자동완성, 필터, 검색 결과 확장 등 6개 과제를 하나씩 배포</span></div>
-              <div class="f-row"><b>결과</b><span>결과 없는 검색 비율을 획기적으로 줄이면서, CTR과 검색당 상품 클릭 수를 크게 끌어올림</span></div>
-              <div class="f-row"><b>판단</b><span>기존 지표가 로깅 변경과 봇 트래픽으로 흔들리는 걸 발견해 검색 지표판을 새로 구축. A/B 그룹 간 사전 차이까지 확인한 뒤 결과 공유</span></div>
-              <div class="f-row"><b>다음</b><span>용어집·동의어 사전 자동화 구축 중 (성과 측정 전)</span></div>
-              <div class="f-row ai"><b>AI 활용</b><span>동의어·용어 매핑 자동화를 직접 구축하고, AI로 지표판 쿼리·대시보드와 자동 알림 봇을 만들어 매일 모니터링</span></div>
-            </div>
-          </div>
-          <button class="toggle">자세히 보기 <span class="ar">⌄</span></button>
         </div>
         <div class="f-visual">
-          <div class="story"><span>로데이터 전수 분석</span><i>→</i><span>문제 정의</span><i>→</i><span>하나씩 개선·배포</span><i>→</i><span class="hl">동의어 자동화</span></div>
+          <div class="story"><span>로데이터 전수 분석</span><i>→</i><span>문제 정의</span><i>→</i><span>6개 개선 배포</span><i>→</i><span class="hl">동의어 자동화</span></div>
           <div class="bn">
             <div class="bn-col bn-before">
               <small>BEFORE</small>
@@ -599,8 +624,66 @@
             <div class="bn-arrow">→</div>
             <div class="bn-col bn-after">
               <small>NOW</small>
-              <ul><li><span class="dn">▼</span> 결과 없는 검색 <b>획기적 감소</b></li><li><span class="up">▲</span> CTR <b>크게 증가</b></li><li><span class="up">▲</span> 검색당 상품 클릭 수 <b>크게 증가</b></li></ul>
+              <ul><li><span class="dn">▼</span> 결과 없는 검색 <b>약 2%</b></li><li><span class="up">▲</span> 결과 적은 검색의 상품 클릭 <b>+13.2%</b></li><li><span class="up">▲</span> 확장 결과 CTR <b>10.4%</b> <span class="sm">(기본 1%)</span></li></ul>
             </div>
+          </div>
+        </div>
+        <div class="acc-wrap">
+          <div class="acc-head"><b>그동안 배포한 검색 개선</b><small>눌러서 하나씩 펼쳐보기</small></div>
+          <div class="acc">
+            <details class="acc-item">
+              <summary><span class="acc-t">검색 결과 확장 <em>커버리지 확대 + 랭킹 개선</em></span><span class="acc-d">2026.08 ~ 10</span><span class="acc-c">+13.2% 클릭</span><span class="acc-i"></span></summary>
+              <div class="acc-body">
+                <p><b>맥락</b> 결과가 없거나 적은 검색의 본질은 매핑되지 않은 단어 하나 때문에 원하는 상품을 못 찾는 문제였습니다. 단순 추천은 알고리즘 성능이 떨어져 답이 아니라고 보고, 지금 검색 구조에 맞게 매칭률을 낮춘 확장 결과를 기본 결과 아래에 보여줬습니다. 두 번의 A/B 테스트를 거쳐 전체 배포했습니다.</p>
+                <div class="acc-kpis">
+                  <div><b>+13.2%</b><span>검색 후 상품 클릭<br/>(결과 10건 이하 검색, A/B)</span></div>
+                  <div><b>10.4%</b><span>확장 영역 CTR<br/>(기본 결과 1%)</span></div>
+                  <div><b>9.3% → 2.0%</b><span>결과 없는 검색 비율<br/>(배포 전후)</span></div>
+                  <div><b>$19,672</b><span>확장 결과 경유 결제 224건<br/>(검색 경유 결제액의 3.3%)</span></div>
+                </div>
+                <p><b>새로 생긴 거래</b> 원래 결과 0건이던 검색 4.7만 건에서, 두 번의 테스트와 배포 이후까지 6주간 클릭 7천 회와 결제 84건($7,365)이 새로 생겼습니다.</p>
+                <p><b>후속</b> 확장 결과의 정렬을 최신순에서 매칭 정확도순으로 바꿔 A/B 후 전체 배포. 확장 영역 클릭이 2배(+100%)로 늘고, 눌린 상품이 더 위쪽(평균 6.19행 → 5.34행)에서 나왔습니다.</p>
+              </div>
+            </details>
+            <details class="acc-item">
+              <summary><span class="acc-t">특수문자 조건부 허용</span><span class="acc-d">2026.03</span><span class="acc-c">0건 13% → 10.65%</span><span class="acc-i"></span></summary>
+              <div class="acc-body">
+                <p><b>맥락</b> 굿즈 이름에 자주 들어가는 특수문자가 포함되면 검색이 실패하는 구조였습니다. 조건을 정해 특수문자를 허용했습니다.</p>
+                <div class="acc-kpis"><div><b>13% → 10.65%</b><span>결과 없는 검색 비율 (-18.1%)</span></div><div><b>0 → 206건</b><span>특수문자 검색 상품 클릭 (하루 평균)</span></div></div>
+              </div>
+            </details>
+            <details class="acc-item">
+              <summary><span class="acc-t">자동완성 글로벌화</span><span class="acc-d">2026.04</span><span class="acc-c">0.7% → 2.7%</span><span class="acc-i"></span></summary>
+              <div class="acc-body">
+                <p><b>맥락</b> 해외 유저가 입력 중에 맞는 검색어를 바로 고를 수 있도록 자동완성을 글로벌 환경에 맞게 바꿨습니다.</p>
+                <div class="acc-kpis"><div><b>0.7% → 2.7%</b><span>자동완성을 거친 검색 비중</span></div></div>
+              </div>
+            </details>
+            <details class="acc-item">
+              <summary><span class="acc-t">연관검색어 영문 우선 정렬</span><span class="acc-d">2026.04</span><span class="acc-c">해외 유저 맞춤</span><span class="acc-i"></span></summary>
+              <div class="acc-body">
+                <p><b>맥락</b> 해외 유저에게 맞게 연관검색어를 영문 우선으로 보여주도록 정렬을 바꿨습니다. 클릭은 잠시 줄었다가 다시 회복했습니다.</p>
+              </div>
+            </details>
+            <details class="acc-item">
+              <summary><span class="acc-t">필터 항목 추가·UI 개선</span><span class="acc-d">2026.06</span><span class="acc-c">필터 사용 +33.5%</span><span class="acc-i"></span></summary>
+              <div class="acc-body">
+                <p><b>맥락</b> 결과를 좁힐 방법이 부족해 원하는 상품까지 가기 어려웠습니다. 필터 항목을 늘리고 화면을 다시 설계했습니다.</p>
+                <div class="acc-kpis"><div><b>+33.5%</b><span>필터 사용 건수</span></div><div><b>+67%</b><span>브랜드 필터 사용</span></div><div><b>370건</b><span>기간 필터 하루 평균</span></div></div>
+              </div>
+            </details>
+            <details class="acc-item">
+              <summary><span class="acc-t">검색 지표판 재구축</span><span class="acc-d"></span><span class="acc-c">판단 기준</span><span class="acc-i"></span></summary>
+              <div class="acc-body">
+                <p><b>맥락</b> 기존 지표가 로깅 변경과 봇 트래픽 때문에 흔들리는 걸 발견하고 검색 지표판을 새로 만들었습니다. A/B 그룹 간 사전 차이까지 확인한 뒤 결과를 공유하는 기준을 세웠고, 쿼리와 대시보드, 자동 알림 봇은 AI로 직접 만들었습니다.</p>
+              </div>
+            </details>
+            <details class="acc-item">
+              <summary><span class="acc-t">이미지 검색</span><span class="acc-d">2026.10</span><span class="acc-c live-c">측정 중</span><span class="acc-i"></span></summary>
+              <div class="acc-body">
+                <p><b>맥락</b> 텍스트로 찾기 어려운 굿즈를 사진으로 찾을 수 있도록 웹에 이미지 검색을 도입했습니다. 로깅과 지표 설계부터 함께 진행했습니다.</p>
+              </div>
+            </details>
           </div>
         </div>
       </article>
@@ -642,14 +725,7 @@
 
       <!-- TIER 2 -->
       <div class="tier-label" data-tier="bunjang build">더 해낸 일 <small>숫자로 확인한 개선</small></div>
-      <div class="grid4">
-        <div class="card hl-card reveal" data-cat="bunjang build">
-          <span class="live">진행 중</span>
-          <div class="k grad-text">Auto</div><div class="kl">동의어·파생어·약어·언어별 명칭 자동 매핑</div>
-          <h4>용어집·동의어 사전 자동화</h4>
-          <p>같은 상품인데 언어나 표기가 달라 못 찾던 검색어를, 트렌드를 반영해 자동으로 연결하는 사전을 직접 만들고 있습니다. 성과는 측정 전입니다.</p>
-          <div class="ctag">Search · Automation</div>
-        </div>
+      <div class="grid4 two">
         <div class="card reveal" data-cat="bunjang">
           <div class="k">+47%</div><div class="kl">결제 중 찜 기여도 11.58% → 17.04%</div>
           <h4>상품 상세·리스트 전환 개선</h4>
@@ -662,13 +738,7 @@
           <p>카테고리를 직접 재보니 유저는 카테고리가 아니라 검색으로 상품을 찾고 있었음. 이를 근거로 검색 필터 중심의 화면 설계를 제안.</p>
           <div class="ctag">Data · IA</div>
         </div>
-        <div class="card reveal d3" data-cat="bunjang">
-          <span class="live">진행 중</span>
-          <div class="k">New</div><div class="kl">2026.10 배포, 성과 측정 중</div>
-          <h4>이미지 검색</h4>
-          <p>텍스트로 찾기 어려운 굿즈를 사진으로 찾을 수 있도록 웹에 이미지 검색을 도입. 로깅과 지표 설계부터 함께 진행.</p>
-          <div class="ctag">Search · New Feature</div>
-        </div>
+        
       </div>
 
       <!-- TIER 3 -->
