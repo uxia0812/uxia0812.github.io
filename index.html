@@ -61,9 +61,10 @@
 
   /* hero */
   .hero{min-height:100vh;display:flex;align-items:center;padding-top:110px;padding-bottom:60px}
-  .hero-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:48px;align-items:center}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:48px;align-items:center}
+  .hero-grid > div{min-width:0}
   .hello{font-size:76px;font-weight:800;line-height:1.08;letter-spacing:-.03em}
-  .role{font-size:76px;font-weight:800;line-height:1.12;color:#fff;letter-spacing:-.03em;min-height:1.15em;white-space:nowrap}
+  .role{font-size:76px;font-weight:800;line-height:1.12;color:#fff;letter-spacing:-.03em;height:1.15em;white-space:nowrap;overflow:visible}
   .caret{display:inline-block;width:4px;height:.85em;background:#fff;margin-left:6px;vertical-align:-4px;animation:blink 1s steps(1) infinite}
   @keyframes blink{50%{opacity:0}}
   .hero-desc{margin-top:28px;font-size:19px;color:var(--text);max-width:600px;line-height:1.75}
@@ -767,6 +768,25 @@ document.querySelectorAll('.icons').forEach(box=>{
 // ---------- Typing roles ----------
 const roles = ['Builder PM','Product Manager','AI Builder'];
 const typed = document.getElementById('typed');
+// Fit the role line so the longest word always fits its column (layout never shifts while typing)
+const roleEl = typed.parentElement;
+function fitRole(){
+  roleEl.style.fontSize = '';
+  const probe = document.createElement('span');
+  probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font:inherit;letter-spacing:inherit';
+  roleEl.appendChild(probe);
+  let maxW = 0;
+  roles.forEach(r => { probe.textContent = r + '|'; maxW = Math.max(maxW, probe.getBoundingClientRect().width); });
+  probe.remove();
+  const avail = roleEl.parentElement.clientWidth;
+  if (maxW > avail) {
+    const cur = parseFloat(getComputedStyle(roleEl).fontSize);
+    roleEl.style.fontSize = Math.floor(cur * avail / maxW * 0.97) + 'px';
+  }
+}
+fitRole();
+document.fonts && document.fonts.ready.then(fitRole);
+addEventListener('resize', fitRole);
 let ri=0, ci=0, del=false;
 (function type(){
   const w = roles[ri];
