@@ -290,6 +290,36 @@
   .sb .kpis div b{font-size:22px}
   .stack{margin-top:14px;font-size:12px;color:var(--p1)}
 
+  /* search case additions */
+  .nowbuild{margin-top:20px;padding:16px 18px;border-radius:14px;position:relative;background:linear-gradient(135deg,rgba(168,85,247,.14),rgba(236,72,153,.08));border:1px solid #5b4580}
+  .nb-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--p1)}
+  .nb-tag i{width:7px;height:7px;border-radius:50%;background:#ec4899;box-shadow:0 0 0 0 rgba(236,72,153,.6);animation:nbpulse 1.8s infinite}
+  @keyframes nbpulse{70%{box-shadow:0 0 0 8px rgba(236,72,153,0)}100%{box-shadow:0 0 0 0 rgba(236,72,153,0)}}
+  .nowbuild b{display:block;color:#fff;font-size:17px;margin-top:6px}
+  .nowbuild p{font-size:14px;line-height:1.7;margin-top:4px;color:var(--text)}
+  .nb-map{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:10px}
+  .nb-map span{font-size:12px;padding:3px 9px;border-radius:999px;border:1px solid var(--line2);color:var(--text);background:rgba(18,18,18,.5)}
+  .nb-map span.hl{color:#fff;border-color:#a855f7;background:rgba(168,85,247,.18)}
+  .nb-map em{font-style:normal;color:var(--p1)}
+  .bn{display:grid;grid-template-columns:1fr 34px 1fr;align-items:stretch;gap:8px}
+  .bn-col{border-radius:14px;padding:16px 16px 14px;border:1px solid var(--line2)}
+  .bn-col small{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--muted)}
+  .bn-col ul{list-style:none;margin-top:10px;display:grid;gap:10px}
+  .bn-col li{font-size:13.5px;line-height:1.5;color:var(--text);opacity:0;transform:translateX(-8px);transition:all .6s var(--ease)}
+  .feature.in .bn-col li{opacity:1;transform:none}
+  .bn-col li:nth-child(2){transition-delay:.15s}.bn-col li:nth-child(3){transition-delay:.3s}
+  .bn-after li{transition-delay:.45s}.bn-after li:nth-child(2){transition-delay:.6s}.bn-after li:nth-child(3){transition-delay:.75s}
+  .bn-before{background:rgba(255,255,255,.02)}
+  .bn-before b{color:#fff}
+  .bn-after{background:linear-gradient(160deg,rgba(168,85,247,.16),rgba(236,72,153,.08));border-color:#5b4580}
+  .bn-after small{color:var(--p1)}
+  .bn-after b{color:#fff}
+  .bn-after .up{color:#ec4899;font-size:11px}.bn-after .dn{color:#c084fc;font-size:11px}
+  .bn-arrow{display:grid;place-items:center;color:var(--p1);font-size:22px;animation:nudge 1.6s ease-in-out infinite}
+  @keyframes nudge{50%{transform:translateX(4px)}}
+  .hl-card{border-color:#5b4580;background:linear-gradient(160deg,rgba(168,85,247,.12),rgba(24,24,24,1) 55%)}
+  @media (max-width:760px){.bn{grid-template-columns:1fr}.bn-arrow{transform:rotate(90deg);animation:none}}
+
   footer{border-top:1px solid var(--line2);padding:28px 0;color:var(--muted);font-size:14px}
   footer .wrap{display:flex;justify-content:space-between;align-items:center}
   footer .logo{font-size:20px}
@@ -380,9 +410,9 @@
           <div class="src">2차 소규모 테스트</div>
         </div>
         <div class="stat reveal d2">
-          <div class="num"><span class="cnt" data-to="1.86" data-dec="2" data-suffix="%">0</span><span class="from">← 6.75%</span></div>
-          <div class="lbl">결과 없는 검색 비율</div>
-          <div class="src">검색 결과 확장 A/B 테스트</div>
+          <div class="num"><span class="cnt" data-to="47" data-prefix="+" data-suffix="%">0</span></div>
+          <div class="lbl">결제 중 찜 기여도</div>
+          <div class="src">상품 리스트 찜 기능 추가 이후</div>
         </div>
         <div class="stat reveal d3">
           <div class="num"><span class="cnt" data-to="55.2" data-dec="1" data-prefix="+" data-suffix="%">0</span></div>
@@ -455,7 +485,7 @@
         <div class="t-item now reveal">
           <div class="t-year">2026</div><div class="t-dot"></div>
           <div class="t-body"><h4>번개장터 Global PM · 검색 스쿼드 리드<em>NOW</em></h4>
-            <ul><li>검색 개선 6개 과제 배포, 검색 결과 확장 A/B 테스트 설계·분석</li><li>신규 서비스 3종을 AI로 직접 만들어 배포하고 광고·측정까지 1인 진행</li></ul></div>
+            <ul><li>검색 개선 6개 과제 배포, 용어집·동의어 사전 자동화 구축 중</li><li>신규 서비스 3종을 AI로 직접 만들어 배포하고 광고·측정까지 1인 진행</li></ul></div>
         </div>
         <div class="t-item reveal">
           <div class="t-year">2025</div><div class="t-dot"></div>
@@ -538,34 +568,38 @@
 
       <article class="feature reveal" data-cat="bunjang">
         <div class="f-info">
-          <div class="f-tags"><span>Squad Lead</span><span>Data</span><span>A/B Test</span></div>
-          <h3>검색 로그 8.4만 건에서<br/>찾은 진짜 문제</h3>
-          <p class="one">해외 유저가 검색해도 원하는 상품을 못 찾는 문제를 맡아, 문제 정의부터 6개 과제 배포와 A/B 테스트까지 스쿼드를 이끌었습니다.</p>
+          <div class="f-tags"><span>Squad Lead</span><span>Raw Data</span><span>Search Quality</span></div>
+          <h3>검색해도 못 찾던 커머스 검색,<br/>밑바닥부터 다시 세우다</h3>
+          <p class="one">절반 넘는 검색이 상품을 하나도 누르지 않고 끝났고, 결과가 0건인 검색도 30% 가까이 됐습니다. 로데이터와 지표를 전부 뜯어보며 문제를 찾고, 하나씩 고쳐 지금 수준까지 끌어올렸습니다. 지금도 계속 개선 중입니다.</p>
+          <div class="nowbuild">
+            <span class="nb-tag"><i></i>NOW BUILDING</span>
+            <b>용어집·동의어 사전 자동화</b>
+            <p>검색 트렌드를 반영해 동의어, 파생어, 약어, 그리고 언어마다 다르게 부르는 같은 상품명을 자동으로 연결하는 사전을 직접 자동화로 만들고 있습니다.</p>
+            <div class="nb-map"><span>동의어</span><span>파생어</span><span>약어</span><span>언어별 명칭</span><em>→</em><span class="hl">같은 상품으로 자동 매핑</span></div>
+          </div>
           <div class="more">
             <div class="f-rows">
-              <div class="f-row"><b>문제</b><span>로그 8.4만 건을 직접 분류해 보니, 한국어 상품명과 정확히 일치해야만 결과가 나오는 구조가 핵심 원인</span></div>
-              <div class="f-row"><b>한 것</b><span>특수문자 허용, 자동완성, 필터, 검색 결과 확장 등 6개 과제 배포. 결과 확장은 A/B 테스트로 검증 후 전체 배포</span></div>
-              <div class="f-row"><b>결과</b><span>결과 없는 검색 6.75% → 1.86%, 결과 10개 이하 검색의 검색당 클릭 +13.2%</span></div>
-              <div class="f-row"><b>판단</b><span>기존 지표가 로깅 변경과 봇 트래픽으로 흔들리는 걸 발견해 지표판을 새로 구축. A/B 그룹 간 사전 차이까지 확인한 뒤 결과 공유</span></div>
-              <div class="f-row ai"><b>AI 활용</b><span>AI로 지표판 쿼리와 대시보드를 직접 만들고, 자동 알림 봇으로 매일 모니터링</span></div>
+              <div class="f-row"><b>문제</b><span>결과 0건인 검색이 30% 가까이, 결과가 있어도 상품을 누르지 않고 이탈. 번역이 ‘검색을 위한 번역’이 아니라 직역이라, 언어마다 다르게 부르는 상품명이 하나도 연결돼 있지 않아 유저가 헤맨 수밖에 없던 구조</span></div>
+              <div class="f-row"><b>한 것</b><span>검색 로그 8.4만 건을 직접 분류하고 지표를 처음부터 다시 뜯어봄. 특수문자 허용, 자동완성, 필터, 검색 결과 확장 등 6개 과제를 하나씩 배포</span></div>
+              <div class="f-row"><b>결과</b><span>결과 없는 검색 비율을 획기적으로 줄이면서, CTR과 검색당 상품 클릭 수를 크게 끌어올림</span></div>
+              <div class="f-row"><b>판단</b><span>기존 지표가 로깅 변경과 봇 트래픽으로 흔들리는 걸 발견해 검색 지표판을 새로 구축. A/B 그룹 간 사전 차이까지 확인한 뒤 결과 공유</span></div>
+              <div class="f-row"><b>다음</b><span>용어집·동의어 사전 자동화 구축 중 (성과 측정 전)</span></div>
+              <div class="f-row ai"><b>AI 활용</b><span>동의어·용어 매핑 자동화를 직접 구축하고, AI로 지표판 쿼리·대시보드와 자동 알림 봇을 만들어 매일 모니터링</span></div>
             </div>
           </div>
           <button class="toggle">자세히 보기 <span class="ar">⌄</span></button>
         </div>
         <div class="f-visual">
-          <div class="story"><span>로그 8.4만 건 분류</span><i>→</i><span>문제 정의</span><i>→</i><span>6개 과제 배포</span><i>→</i><span class="hl">A/B 검증</span></div>
-          <div class="metric">
-            <div class="m-top"><span class="m-name">결과 없는 검색 비율 (낮을수록 좋음)</span><span class="m-delta">-72%</span></div>
-            <div class="bars">
-              <div class="bar before"><span>Before</span><div class="track"><div class="fill" data-w="100"></div></div><span class="val">6.75%</span></div>
-              <div class="bar after"><span>After</span><div class="track"><div class="fill" data-w="27.6"></div></div><span class="val">1.86%</span></div>
+          <div class="story"><span>로데이터 전수 분석</span><i>→</i><span>문제 정의</span><i>→</i><span>하나씩 개선·배포</span><i>→</i><span class="hl">동의어 자동화</span></div>
+          <div class="bn">
+            <div class="bn-col bn-before">
+              <small>BEFORE</small>
+              <ul><li>결과 0건 검색 <b>약 30%</b></li><li>검색해도 상품을 안 누르고 이탈</li><li>직역 번역, 언어별 명칭 매핑 없음</li></ul>
             </div>
-          </div>
-          <div class="metric">
-            <div class="m-top"><span class="m-name">결과 10개 이하 검색의 검색당 클릭</span><span class="m-delta">+13.2%</span></div>
-            <div class="bars">
-              <div class="bar before"><span>대조군</span><div class="track"><div class="fill" data-w="88.3"></div></div><span class="val">기준</span></div>
-              <div class="bar after"><span>실험군</span><div class="track"><div class="fill" data-w="100"></div></div><span class="val">+13.2%</span></div>
+            <div class="bn-arrow">→</div>
+            <div class="bn-col bn-after">
+              <small>NOW</small>
+              <ul><li><span class="dn">▼</span> 결과 없는 검색 <b>획기적 감소</b></li><li><span class="up">▲</span> CTR <b>크게 증가</b></li><li><span class="up">▲</span> 검색당 상품 클릭 수 <b>크게 증가</b></li></ul>
             </div>
           </div>
         </div>
@@ -609,6 +643,13 @@
       <!-- TIER 2 -->
       <div class="tier-label" data-tier="bunjang build">더 해낸 일 <small>숫자로 확인한 개선</small></div>
       <div class="grid4">
+        <div class="card hl-card reveal" data-cat="bunjang build">
+          <span class="live">진행 중</span>
+          <div class="k grad-text">Auto</div><div class="kl">동의어·파생어·약어·언어별 명칭 자동 매핑</div>
+          <h4>용어집·동의어 사전 자동화</h4>
+          <p>같은 상품인데 언어나 표기가 달라 못 찾던 검색어를, 트렌드를 반영해 자동으로 연결하는 사전을 직접 만들고 있습니다. 성과는 측정 전입니다.</p>
+          <div class="ctag">Search · Automation</div>
+        </div>
         <div class="card reveal" data-cat="bunjang">
           <div class="k">+47%</div><div class="kl">결제 중 찜 기여도 11.58% → 17.04%</div>
           <h4>상품 상세·리스트 전환 개선</h4>
@@ -620,12 +661,6 @@
           <h4>스타굿즈 카테고리 개편</h4>
           <p>카테고리를 직접 재보니 유저는 카테고리가 아니라 검색으로 상품을 찾고 있었음. 이를 근거로 검색 필터 중심의 화면 설계를 제안.</p>
           <div class="ctag">Data · IA</div>
-        </div>
-        <div class="card reveal d2" data-cat="bunjang build">
-          <div class="k">0.07%</div><div class="kl">398개 카테고리 정리로 잃는 주문</div>
-          <h4>해외배송 불가 품목 정리</h4>
-          <p>프록시사별 배송 불가 카테고리를 전수 조사해 미노출 처리. 관리용 카테고리 페이지를 직접 만들어 운영 부담을 줄임.</p>
-          <div class="ctag">Ops · Tools-Web</div>
         </div>
         <div class="card reveal d3" data-cat="bunjang">
           <span class="live">진행 중</span>
