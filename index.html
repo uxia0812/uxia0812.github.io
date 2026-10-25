@@ -369,6 +369,21 @@
   @media (max-width:1024px){.proc{grid-template-columns:repeat(2,1fr)}}
   @media (max-width:760px){.proc-wrap{padding:24px 18px}.proc{grid-template-columns:1fr}}
 
+  /* kakao contact */
+  .kakao-card{border:1px solid #5b4580;border-radius:22px;padding:30px 30px 26px;background:linear-gradient(160deg,rgba(168,85,247,.14),rgba(24,24,24,.9) 60%);position:relative;overflow:hidden}
+  .kakao-card::after{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(254,229,0,.16),transparent 70%);pointer-events:none}
+  .kc-top{display:flex;align-items:center;gap:14px}
+  .kc-ic{width:52px;height:52px;border-radius:16px;background:#FEE500;display:grid;place-items:center;flex:none;box-shadow:0 10px 24px -10px rgba(254,229,0,.6)}
+  .kc-ic img{width:28px;height:28px}.kc-ic b{color:#191919;font-size:22px}
+  .kc-top b{display:block;color:#fff;font-size:20px;font-weight:800}
+  .kc-top small{font-size:13px;color:var(--muted)}
+  .kakao-card p{margin-top:16px;font-size:15px;line-height:1.75}
+  .kc-btn{margin-top:22px;width:100%;justify-content:center;background:#FEE500;color:#191919;font-weight:700;box-shadow:0 12px 30px -12px rgba(254,229,0,.55)}
+  .kc-btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px -12px rgba(254,229,0,.7)}
+  .kc-btn span{transition:transform .25s var(--ease)}.kc-btn:hover span{transform:translateX(4px)}
+  .kc-sub{display:inline-block;margin-top:14px;font-size:13px;color:var(--text);border-bottom:1px solid var(--line2);transition:color .2s,border-color .2s}
+  .kc-sub:hover{color:#fff;border-color:var(--p1)}
+
   footer{border-top:1px solid var(--line2);padding:28px 0;color:var(--muted);font-size:14px}
   footer .wrap{display:flex;justify-content:space-between;align-items:center}
   footer .logo{font-size:20px}
@@ -590,7 +605,6 @@
               <div class="f-row"><b>전략</b><span>타겟을 미국·유럽의 캐주얼 팬으로 정하고, 목표를 ‘반복 방문 → 거래 연결’ 순서로 설정. 위버스의 캐주얼 팬 → 슈퍼팬 전환 데이터로 예상 임팩트를 산출(보수적 추정 월 2천~3천 건 추가 결제)</span></div>
               <div class="f-row"><b>반전</b><span>1차 테스트(유료 유입 5,617명) 굿즈 클릭률 2.23%로 부진. 세션 녹화를 보다가 "광고에서 본 아이돌이 첫 화면에 없으면 바로 나간다"는 원인을 찾아 첫 화면을 고침</span></div>
               <div class="f-row"><b>결과</b><span>광고비 0원 소규모 2차 테스트에서 굿즈 클릭률 25.8%, 글로벌번장 전환율 3.0% → 51.6%. 1차에서도 글로벌번장으로 넘어간 유저의 구매 시도율은 19.3%로 평소 상품 상세 평균(1.24%)보다 크게 높았음</span></div>
-              <div class="f-row"><b>판단</b><span>자연 유입이 1% 미만이라 지금 형태 그대로의 피처화는 보류하고, 고품질 타겟 유입으로 다시 검증하기로 결정</span></div>
               <div class="f-row ai"><b>AI 활용</b><span>Claude Code·Vercel·Supabase로 1인 개발, 음악방송 5사 일정을 매일 자동 수집해 한정판 매물과 연결. GA4·PostHog 측정까지 직접 연동</span></div>
             </div>
             <div class="f-note">* 2차 테스트는 광고비 0원, 방문 31명 규모의 소규모 테스트 결과입니다.</div>
@@ -634,7 +648,7 @@
         <div class="f-info">
           <div class="f-tags"><span>Squad Lead</span><span>Raw Data</span><span>Search Quality</span></div>
           <h3>검색해도 못 찾던 커머스 검색,<br/>밑바닥부터 다시 세우다</h3>
-          <p class="one">절반 넘는 검색이 상품을 하나도 누르지 않고 끝났고, 결과가 0건인 검색도 30% 가까이 됐습니다. 번역은 검색을 위한 번역이 아닌 직역이라, 언어마다 다르게 부르는 상품명이 하나도 연결돼 있지 않았습니다. 로데이터와 지표를 전부 뜯어보며 문제를 찾고 하나씩 고쳐 지금 수준까지 끌어올렸고, 지금도 계속 개선 중입니다.</p>
+          <p class="one">절반 넘는 검색이 상품을 하나도 누르지 않고 끝났고, 결과가 0건인 검색도 15% 가까이 됐습니다. 번역은 검색을 위한 번역이 아닌 직역이라, 언어마다 다르게 부르는 상품명이 하나도 연결돼 있지 않았습니다. 로데이터와 지표를 전부 뜯어보며 문제를 찾고 하나씩 고쳐 지금 수준까지 끌어올렸고, 지금도 계속 개선 중입니다.</p>
           <div class="nowbuild main">
             <span class="nb-tag"><i></i>MAIN · NOW BUILDING</span>
             <b>용어집·동의어 사전 자동화</b>
@@ -648,7 +662,7 @@
           <div class="bn">
             <div class="bn-col bn-before">
               <small>BEFORE</small>
-              <ul><li>결과 0건 검색 <b>약 30%</b></li><li>검색해도 상품을 안 누르고 이탈</li><li>직역 번역, 언어별 명칭 매핑 없음</li></ul>
+              <ul><li>결과 0건 검색 <b>약 15%</b></li><li>검색해도 상품을 안 누르고 이탈</li><li>직역 번역, 언어별 명칭 매핑 없음</li></ul>
             </div>
             <div class="bn-arrow">→</div>
             <div class="bn-col bn-after">
@@ -661,17 +675,17 @@
           <div class="acc-head"><b>그동안 배포한 검색 개선</b><small>눌러서 하나씩 펼쳐보기</small></div>
           <div class="acc">
             <details class="acc-item">
-              <summary><span class="acc-t">검색 결과 확장 <em>커버리지 확대 + 랭킹 개선</em></span><span class="acc-d">2026.08 ~ 10</span><span class="acc-c">+13.2% 클릭</span><span class="acc-i"></span></summary>
+              <summary><span class="acc-t">검색 결과 확장 <em>커버리지 확대 + 랭킹 개선</em></span><span class="acc-d">2026.08 ~ 10</span><span class="acc-c">결과 0건 −78%</span><span class="acc-i"></span></summary>
               <div class="acc-body">
                 <p><b>맥락</b> 결과가 없거나 적은 검색의 본질은 매핑되지 않은 단어 하나 때문에 원하는 상품을 못 찾는 문제였습니다. 단순 추천은 알고리즘 성능이 떨어져 답이 아니라고 보고, 지금 검색 구조에 맞게 매칭률을 낮춘 확장 결과를 기본 결과 아래에 보여줬습니다. 두 번의 A/B 테스트를 거쳐 전체 배포했습니다.</p>
                 <div class="acc-kpis">
+                  <div><b>−78%</b><span>결과 없는 검색 비율<br/>(9.3% → 2.0%)</span></div>
                   <div><b>+13.2%</b><span>검색 후 상품 클릭<br/>(결과 10건 이하 검색, A/B)</span></div>
                   <div><b>10.4%</b><span>확장 영역 CTR<br/>(기본 결과 1%)</span></div>
-                  <div><b>9.3% → 2.0%</b><span>결과 없는 검색 비율<br/>(배포 전후)</span></div>
-                  <div><b>$19,672</b><span>확장 결과 경유 결제 224건<br/>(검색 경유 결제액의 3.3%)</span></div>
+                  <div><b>3.3%</b><span>검색 경유 결제액 중<br/>확장 결과가 만든 비중</span></div>
                 </div>
-                <p><b>새로 생긴 거래</b> 원래 결과 0건이던 검색 4.7만 건에서, 두 번의 테스트와 배포 이후까지 6주간 클릭 7천 회와 결제 84건($7,365)이 새로 생겼습니다.</p>
-                <p><b>후속</b> 확장 결과의 정렬을 최신순에서 매칭 정확도순으로 바꿔 A/B 후 전체 배포. 확장 영역 클릭이 2배(+100%)로 늘고, 눌린 상품이 더 위쪽(평균 6.19행 → 5.34행)에서 나왔습니다.</p>
+                <p><b>버려지던 검색의 재발견</b> 확장 결과로 생긴 결제액의 37%는 원래 결과가 0건이라 그냥 끝나던 검색에서 나왔습니다.</p>
+                <p><b>후속</b> 확장 결과의 정렬을 최신순에서 매칭 정확도순으로 바꿔 A/B 후 전체 배포. 확장 영역 클릭이 +100%(2배) 늘고, 눌린 상품의 위치는 14% 더 위로 올라왔습니다.</p>
               </div>
             </details>
             <details class="acc-item">
@@ -855,18 +869,17 @@
           <a href="https://xia-it.tistory.com/" target="_blank" aria-label="Blog"><img src="https://xia-portfolio.vercel.app/_next/static/media/blog_icon.6d60247d.svg" alt="Blog"/></a>
         </div>
       </div>
-      <form class="reveal d1" id="cform">
-        <div class="fld"><label for="em">Your Email</label><input id="em" type="email" placeholder="Please enter your email" required /></div>
-        <div class="fld"><label for="sj">Subject</label><input id="sj" placeholder="Please send any questions" required /></div>
-        <div class="fld"><label for="ms">Message</label><textarea id="ms" placeholder="Let's talk about.."></textarea></div>
-        <button class="btn btn-fill send" type="submit">Send Message</button>
-      </form>
+      <div class="kakao-card reveal d1">
+        <div class="kc-top"><span class="kc-ic"><img src="https://cdn.simpleicons.org/kakaotalk/191919" alt="KakaoTalk" onerror="this.outerHTML='<b>K</b>'"/></span><div><b>PM Portfolio</b><small>카카오톡 오픈채팅</small></div></div>
+        <p>궁금한 점이나 제안이 있다면 오픈채팅으로 편하게 말 걸어주세요. 버튼을 누르면 카카오톡이 실행됩니다.</p>
+        <a class="btn kc-btn" href="https://open.kakao.com/o/svHJj8Ti" target="_blank" rel="noopener">카카오톡으로 연락하기 <span>→</span></a>
+        <a class="kc-sub" href="https://www.linkedin.com/in/youjeong-jang-6bb368214/" target="_blank" rel="noopener">또는 LinkedIn으로 메시지 보내기 →</a>
+      </div>
     </div>
   </section>
 </main>
 
 <footer><div class="wrap"><span class="logo">&lt;/&gt;</span><span>© 2026 Xia. All rights reserved.</span></div></footer>
-<div class="toast" id="toast">시안 페이지라 실제로 전송되지는 않아요.</div>
 
 <script>
 // ---------- Dev projects (from existing site) ----------
@@ -989,7 +1002,7 @@ tilt.addEventListener('pointermove',e=>{ const r = tilt.getBoundingClientRect();
 tilt.addEventListener('pointerleave',()=>tilt.style.transform='');
 
 // ---------- Form ----------
-document.getElementById('cform').addEventListener('submit',e=>{ e.preventDefault(); const t = document.getElementById('toast'); t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2600); });
+
 </script>
 </body>
 </html>
