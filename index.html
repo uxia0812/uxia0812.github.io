@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Xia's Portfolio · Builder PM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root{
+    --bg:#121212; --card:#181818; --card2:#1d1d22; --line:#2a2b33; --line2:#33353F;
+    --text:#ADB7BE; --white:#f5f5f7; --muted:#7c838a;
+    --p1:#c084fc; --p2:#a855f7; --pk:#ec4899; --pk2:#db2777;
+    --grad:linear-gradient(90deg,#a855f7,#ec4899);
+    --grad2:linear-gradient(135deg,#c084fc 0%,#a855f7 40%,#ec4899 100%);
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:Inter,Pretendard,system-ui,sans-serif;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;word-break:keep-all}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+  .grad-text{background:var(--grad2);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* ambient background */
+  .ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.35;animation:drift 22s ease-in-out infinite alternate}
+  .blob.b1{width:520px;height:520px;background:#581c87;top:-160px;right:-120px}
+  .blob.b2{width:420px;height:420px;background:#831843;bottom:-180px;left:-140px;animation-duration:28s;opacity:.25}
+  @keyframes drift{to{transform:translate(-80px,90px) scale(1.15)}}
+  .cursor-glow{position:fixed;width:560px;height:560px;border-radius:50%;pointer-events:none;z-index:0;
+    background:radial-gradient(circle,rgba(168,85,247,.10),transparent 60%);transform:translate(-50%,-50%);transition:opacity .3s}
+  .grain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.05;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+  main,nav,footer{position:relative;z-index:2}
+
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;border-bottom:1px solid transparent;transition:all .35s var(--ease)}
+  nav.scrolled{background:rgba(18,18,18,.72);backdrop-filter:blur(14px);border-bottom-color:var(--line2)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:76px}
+  .logo{font-weight:800;font-size:30px;color:#fff;letter-spacing:-1px}
+  .nav-links{display:flex;gap:36px;list-style:none}
+  .nav-links a{color:var(--text);font-size:17px;position:relative;transition:color .2s}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--grad);transition:width .3s var(--ease)}
+  .nav-links a:hover,.nav-links a.active{color:#fff}
+  .nav-links a.active::after{width:100%}
+  .burger{display:none;background:none;border:1px solid var(--line2);color:#fff;border-radius:8px;padding:6px 10px;font-size:18px;cursor:pointer}
+
+  section{padding:96px 0}
+  .sec-title{font-size:44px;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.15}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--p1);margin-bottom:14px}
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--grad)}
+  .sec-sub{margin-top:14px;font-size:17px;color:var(--muted);max-width:640px}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+
+  /* hero */
+  .hero{min-height:100vh;display:flex;align-items:center;padding-top:110px;padding-bottom:60px}
+  .hero-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:48px;align-items:center}
+  .hello{font-size:76px;font-weight:800;line-height:1.08;letter-spacing:-.03em}
+  .role{font-size:76px;font-weight:800;line-height:1.12;color:#fff;letter-spacing:-.03em;min-height:1.15em;white-space:nowrap}
+  .caret{display:inline-block;width:4px;height:.85em;background:#fff;margin-left:6px;vertical-align:-4px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .hero-desc{margin-top:28px;font-size:19px;color:var(--text);max-width:600px;line-height:1.75}
+  .hero-desc b{color:#fff;font-weight:600}
+  .btns{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:999px;font-weight:600;font-size:16px;transition:transform .25s var(--ease),box-shadow .25s}
+  .btn-fill{background:var(--grad2);color:#fff;box-shadow:0 10px 30px -10px rgba(168,85,247,.6)}
+  .btn-fill:hover{transform:translateY(-2px);box-shadow:0 16px 40px -10px rgba(236,72,153,.6)}
+  .btn-line{position:relative;color:#fff;background:var(--bg);border:2px solid transparent;background-clip:padding-box}
+  .btn-line::before{content:"";position:absolute;inset:-2px;border-radius:inherit;background:var(--grad2);z-index:-1}
+  .btn-line:hover{transform:translateY(-2px)}
+  .avatar-wrap{position:relative;width:min(420px,100%);aspect-ratio:1;margin-left:auto}
+  .avatar-ring{position:absolute;inset:-3px;border-radius:50%;background:conic-gradient(from 0deg,#a855f7,#ec4899,#121212 55%,#a855f7);animation:spin 9s linear infinite;filter:blur(.5px)}
+  .avatar-ring::after{content:"";position:absolute;inset:3px;border-radius:50%;background:#181818}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .avatar{position:absolute;inset:3px;border-radius:50%;overflow:hidden;background:#181818}
+  .avatar img{width:100%;height:100%;object-fit:cover;transform:scale(1.04)}
+  .badge-float{position:absolute;background:rgba(24,24,24,.85);backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:14px;padding:10px 14px;font-size:13px;color:#fff;display:flex;align-items:center;gap:8px;animation:float 6s ease-in-out infinite;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  .badge-float i{width:8px;height:8px;border-radius:50%;background:var(--grad2);display:inline-block}
+  .badge-float.f1{top:8%;left:-8%}
+  .badge-float.f2{bottom:12%;right:-6%;animation-delay:-3s}
+  @keyframes float{50%{transform:translateY(-10px)}}
+
+  .impact{margin-top:72px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .stat{background:linear-gradient(180deg,rgba(29,29,34,.9),rgba(24,24,24,.9));border:1px solid var(--line);border-radius:18px;padding:22px 22px 20px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s var(--ease)}
+  .stat:hover{border-color:#4b3a66;transform:translateY(-3px)}
+  .stat::after{content:"";position:absolute;left:0;top:0;height:2px;width:100%;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform 1.2s var(--ease)}
+  .stat.in::after{transform:scaleX(1)}
+  .stat .num{font-size:38px;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.1}
+  .stat .from{font-size:14px;color:var(--muted);font-weight:500;margin-left:4px}
+  .stat .lbl{margin-top:8px;font-size:14px;color:var(--text)}
+  .stat .src{margin-top:2px;font-size:12px;color:var(--muted)}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:72px;align-items:center}
+  .about-img{position:relative;border-radius:22px;overflow:hidden;transform-style:preserve-3d;transition:transform .2s}
+  .about-img img{width:100%;aspect-ratio:1;object-fit:cover}
+  .about-img::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+  .about-text p{font-size:17px;line-height:1.85;margin-top:22px;color:var(--text)}
+  .about-text p b{color:#fff;font-weight:600}
+  .quote{border-left:2px solid;border-image:var(--grad) 1;padding-left:16px;color:#fff !important;font-weight:500}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+  .chip{font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid var(--line2);color:var(--text);background:rgba(255,255,255,.02)}
+  .chips-label{font-size:12px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:30px}
+
+  /* skills */
+  .flow{margin-top:56px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;position:relative}
+  .flow-line{position:absolute;top:30px;left:6%;right:6%;height:1px;background:var(--line2);overflow:hidden}
+  .flow-line::after{content:"";position:absolute;inset:0;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform 1.8s var(--ease)}
+  .flow.in .flow-line::after{transform:scaleX(1)}
+  .step{position:relative;text-align:left;padding:0 6px}
+  .step .dot{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:#181818;border:1px solid var(--line2);font-weight:700;color:#fff;font-size:15px;position:relative;z-index:1;transition:all .4s var(--ease)}
+  .step:hover .dot{background:var(--grad2);border-color:transparent;transform:scale(1.06)}
+  .step h4{margin-top:18px;color:#fff;font-size:18px;font-weight:700}
+  .step p{margin-top:6px;font-size:14px;color:var(--text);line-height:1.6}
+  .step .tools{margin-top:10px;font-size:12px;color:var(--muted)}
+
+  .skill-zone{position:relative;margin-top:84px}
+  .bigword{position:absolute;font-size:220px;font-weight:800;color:rgba(255,255,255,.035);letter-spacing:-.04em;line-height:1;pointer-events:none;user-select:none}
+  .bigword.w1{right:0;top:-70px}.bigword.w2{right:0;bottom:-40px}
+  .groups{display:flex;flex-direction:column;gap:30px;position:relative}
+  fieldset.group{border:1px solid var(--line2);border-radius:18px;padding:16px 26px 22px;width:fit-content;max-width:100%;transition:border-color .3s}
+  fieldset.group:hover{border-color:#5b4580}
+  fieldset.group legend{padding:0 12px;color:#fff;font-weight:700;font-size:18px;margin:0 auto}
+  .icons{display:flex;flex-wrap:wrap;gap:16px}
+  .tool{display:flex;flex-direction:column;align-items:center;gap:8px;width:76px}
+  .tool .ic{width:64px;height:64px;border-radius:50%;background:#e9e9ec;display:grid;place-items:center;transition:transform .35s var(--ease),box-shadow .35s}
+  .tool .ic img{width:32px;height:32px}
+  .tool .ic span{font-weight:800;color:#222;font-size:15px}
+  .tool:hover .ic{transform:translateY(-4px) rotate(-4deg);box-shadow:0 12px 26px -8px rgba(168,85,247,.55)}
+  .tool small{font-size:12px;color:var(--muted);text-align:center;line-height:1.3}
+
+  /* career */
+  .career-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+  .timeline{margin-top:56px;position:relative}
+  .timeline::before{content:"";position:absolute;left:170px;top:10px;bottom:10px;border-left:1px dashed #3a3c45}
+  .t-item{display:grid;grid-template-columns:140px 60px 1fr;align-items:start;padding:22px 0}
+  .t-year{font-size:28px;font-weight:700;color:#fff;text-align:right;padding-right:10px;line-height:1.2}
+  .t-dot{width:22px;height:22px;border-radius:50%;background:var(--grad2);margin:6px auto 0;position:relative;z-index:1;box-shadow:0 0 0 6px var(--bg)}
+  .t-item.now .t-dot::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid #ec4899;animation:pulse 2s ease-out infinite}
+  @keyframes pulse{from{transform:scale(.7);opacity:1}to{transform:scale(1.7);opacity:0}}
+  .t-body h4{color:#fff;font-size:19px;font-weight:600;line-height:1.45}
+  .t-body h4 em{font-style:normal;font-size:13px;color:var(--p1);font-weight:600;margin-left:8px;border:1px solid #4b3a66;border-radius:999px;padding:2px 8px;vertical-align:2px}
+  .t-body ul{margin-top:8px;padding-left:18px}
+  .t-body li{font-size:14px;color:var(--text);line-height:1.75}
+
+  /* projects */
+  .proj-head{text-align:center}
+  .tabs{display:flex;justify-content:center;gap:10px;margin-top:30px;flex-wrap:wrap}
+  .tab{background:transparent;border:2px solid var(--line2);color:var(--text);padding:9px 22px;border-radius:999px;font-size:15px;font-weight:600;cursor:pointer;transition:all .25s;font-family:inherit}
+  .tab:hover{border-color:#fff;color:#fff}
+  .tab.on{border-color:var(--p2);color:#fff;background:rgba(168,85,247,.12)}
+  .tier-label{display:flex;align-items:center;gap:14px;margin:64px 0 22px;color:#fff;font-weight:700;font-size:20px}
+  .tier-label small{font-size:13px;color:var(--muted);font-weight:500}
+  .tier-label::after{content:"";flex:1;height:1px;background:var(--line2)}
+  .hide{display:none !important}
+
+  .feature{display:grid;grid-template-columns:1.1fr 1fr;gap:0;background:var(--card);border-radius:24px;overflow:hidden;position:relative;margin-bottom:26px;border:1px solid var(--line)}
+  .feature::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(168,85,247,.0),rgba(168,85,247,.0));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;transition:background .4s;pointer-events:none}
+  .feature:hover::before{background:linear-gradient(135deg,#a855f7,#ec4899)}
+  .feature:nth-of-type(even) .f-visual{order:-1}
+  .f-info{padding:44px 44px 38px;display:flex;flex-direction:column;justify-content:center}
+  .f-info .toggle{align-self:flex-start}
+  .f-tags{display:flex;gap:6px;flex-wrap:wrap}
+  .f-tags span{font-size:12px;color:var(--p1);border:1px solid #3e3150;background:rgba(168,85,247,.07);padding:3px 10px;border-radius:999px;font-weight:600}
+  .f-info h3{margin-top:16px;color:#fff;font-size:28px;font-weight:800;letter-spacing:-.02em;line-height:1.3}
+  .f-info .one{margin-top:12px;font-size:16px;color:var(--text);line-height:1.75}
+  .f-rows{margin-top:22px;display:grid;gap:12px}
+  .f-row{display:grid;grid-template-columns:72px 1fr;gap:10px;font-size:14.5px;line-height:1.7}
+  .f-row b{color:#fff;font-weight:600;font-size:13px;padding-top:2px}
+  .f-row.ai b{background:var(--grad2);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .more{max-height:0;overflow:hidden;transition:max-height .6s var(--ease)}
+  .feature.open .more{max-height:600px}
+  .toggle{margin-top:20px;background:none;border:none;color:#fff;font-weight:600;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-family:inherit;padding:0}
+  .toggle .ar{transition:transform .3s;display:inline-block}
+  .feature.open .toggle .ar{transform:rotate(180deg)}
+  .f-note{margin-top:10px;font-size:12px;color:var(--muted)}
+
+  .f-visual{background:radial-gradient(120% 90% at 80% 0%,rgba(168,85,247,.20),transparent 60%),radial-gradient(90% 80% at 0% 100%,rgba(236,72,153,.14),transparent 60%),#16161b;padding:40px;display:flex;flex-direction:column;justify-content:center;gap:26px;border-left:1px solid var(--line)}
+  .feature:nth-of-type(even) .f-visual{border-left:none;border-right:1px solid var(--line)}
+  .metric .m-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .metric .m-name{font-size:14px;color:var(--text)}
+  .metric .m-delta{font-size:30px;font-weight:800;color:#fff;letter-spacing:-.02em}
+  .bars{margin-top:12px;display:grid;gap:8px}
+  .bar{display:grid;grid-template-columns:52px 1fr 64px;align-items:center;gap:10px;font-size:12px;color:var(--muted)}
+  .bar .track{height:10px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden}
+  .bar .fill{height:100%;width:0;border-radius:inherit;background:#4a4b55;transition:width 1.6s var(--ease)}
+  .bar.after .fill{background:var(--grad)}
+  .bar .val{color:#fff;font-weight:600;text-align:right;font-size:13px}
+  .bar.before .val{color:var(--muted)}
+  .story{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text);flex-wrap:wrap}
+  .story span{padding:6px 10px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--line2)}
+  .story i{color:var(--p1);font-style:normal}
+  .story span.hl{border-color:#5b4580;color:#fff;background:rgba(168,85,247,.12)}
+
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 24px;display:flex;flex-direction:column;transition:transform .35s var(--ease),border-color .35s,background .35s;position:relative;overflow:hidden}
+  .card:hover{transform:translateY(-6px);border-color:#4b3a66;background:#1b1a20}
+  .card .k{font-size:34px;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.1}
+  .card .kl{font-size:13px;color:var(--muted);margin-top:6px;min-height:20px}
+  .card h4{color:#fff;font-size:18px;font-weight:700;margin-top:22px;line-height:1.4}
+  .card p{font-size:14px;margin-top:8px;line-height:1.7;flex:1}
+  .card .ctag{margin-top:16px;font-size:12px;color:var(--p1)}
+  .card .live{position:absolute;top:18px;right:18px;font-size:11px;color:#fff;background:rgba(236,72,153,.18);border:1px solid rgba(236,72,153,.4);padding:2px 8px;border-radius:999px}
+
+  .compact{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px}
+  .c-row{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .c-row b{color:#fff;font-size:15px;font-weight:600}
+  .c-row p{font-size:14px;line-height:1.7}
+
+  .before-feature{display:grid;grid-template-columns:1fr 1.2fr;background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;margin-bottom:22px}
+  .before-feature .bf-img{background:#0f0f12;display:grid;place-items:center;padding:26px}
+  .before-feature .bf-img img{border-radius:12px;max-height:300px;object-fit:contain}
+  .before-feature .bf-info{padding:38px 40px}
+  .before-feature h3{color:#fff;font-size:24px;font-weight:800;margin-top:12px}
+  .kpis{display:flex;gap:26px;margin-top:20px;flex-wrap:wrap}
+  .kpis div{font-size:13px;color:var(--muted)}
+  .kpis div b{display:block;font-size:24px;color:#fff;font-weight:800}
+
+  .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .pcard{background:var(--card);border-radius:16px;overflow:hidden;border:1px solid var(--line);transition:transform .35s var(--ease),border-color .3s}
+  .pcard:hover{transform:translateY(-5px);border-color:#4b3a66}
+  .pcard .pimg{aspect-ratio:16/10;overflow:hidden;position:relative;background:#0f0f12}
+  .pcard .pimg img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+  .pcard:hover .pimg img{transform:scale(1.06)}
+  .pcard .pimg .ov{position:absolute;inset:0;background:rgba(18,18,18,.7);display:grid;place-items:center;opacity:0;transition:opacity .3s}
+  .pcard:hover .ov{opacity:1}
+  .ov span{border:2px solid #ADB7BE;color:#fff;border-radius:999px;padding:6px 14px;font-size:13px}
+  .pcard .pb{padding:16px 18px 18px}
+  .pcard h5{color:#fff;font-size:15px;font-weight:700}
+  .pcard p{font-size:13px;margin-top:4px;line-height:1.55;color:var(--text)}
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .contact h4{font-size:32px;font-weight:800;color:#fff}
+  .contact .cdesc{margin-top:14px;font-size:17px;max-width:460px;line-height:1.8}
+  .socials{display:flex;gap:16px;margin-top:26px}
+  .socials a{width:52px;height:52px;display:grid;place-items:center;border-radius:14px;border:1px solid var(--line2);transition:all .3s var(--ease)}
+  .socials a:hover{border-color:var(--p2);transform:translateY(-3px);background:rgba(168,85,247,.1)}
+  .socials img{width:28px;height:28px}
+  form label{display:block;color:#fff;font-weight:600;font-size:14px;margin:0 0 8px}
+  form .fld{margin-bottom:20px}
+  input,textarea{width:100%;background:#18191E;border:1px solid var(--line2);color:#fff;border-radius:10px;padding:13px 14px;font-size:15px;font-family:inherit;transition:border-color .25s,box-shadow .25s}
+  input:focus,textarea:focus{outline:none;border-color:var(--p2);box-shadow:0 0 0 4px rgba(168,85,247,.15)}
+  textarea{min-height:110px;resize:vertical}
+  .send{width:100%;border:none;cursor:pointer;font-family:inherit;justify-content:center}
+  .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,40px);opacity:0;background:#1d1d22;border:1px solid var(--line2);color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;z-index:60;transition:all .4s var(--ease)}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  /* about additions */
+  .lead{font-size:20px !important;color:#fff !important;font-weight:700;letter-spacing:-.01em;margin-top:18px !important}
+  .philo{display:grid;gap:10px;margin-top:12px}
+  .philo div{padding:12px 16px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid var(--line);border-left:2px solid #a855f7;transition:border-color .3s,background .3s}
+  .philo div:hover{background:rgba(168,85,247,.07);border-color:#4b3a66}
+  .philo b{display:block;color:#fff;font-weight:600;font-size:15px}
+  .philo span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+
+  /* before bunjang additions */
+  .f-info h3 .sub{display:block;font-size:16px;font-weight:600;color:var(--p1);margin-top:6px;letter-spacing:0}
+  .deliv{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+  .deliv span{font-size:12px;color:var(--text);border:1px solid var(--line2);border-radius:8px;padding:4px 9px;background:rgba(255,255,255,.02)}
+  .f-visual.imgv{padding:30px;gap:18px;background:radial-gradient(80% 60% at 50% 35%,#1e1e1f 55%,transparent 100%),radial-gradient(90% 80% at 0% 100%,rgba(236,72,153,.12),transparent 60%),radial-gradient(120% 90% at 80% 0%,rgba(168,85,247,.16),transparent 60%),#1a1a1d}
+  .fade{-webkit-mask-image:linear-gradient(to right,transparent,#000 10%,#000 90%,transparent),linear-gradient(to bottom,transparent,#000 10%,#000 90%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 10%,#000 90%,transparent),linear-gradient(to bottom,transparent,#000 10%,#000 90%,transparent);mask-composite:intersect}
+  .f-visual.imgv img{width:100%;max-height:400px;object-fit:contain;object-position:center;transition:transform .8s var(--ease)}
+  .feature:hover .f-visual.imgv img{transform:scale(1.03) translateY(-4px)}
+  .kgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .kgrid div{background:rgba(18,18,18,.6);border:1px solid var(--line2);border-radius:12px;padding:12px 14px}
+  .kgrid b{display:block;font-size:24px;color:#fff;font-weight:800;letter-spacing:-.02em}
+  .kgrid span{font-size:12px;color:var(--muted)}
+  .sub-label{margin:46px 0 18px;font-size:15px;font-weight:700;color:var(--text);letter-spacing:.04em}
+  .side2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .scard{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;transition:transform .35s var(--ease),border-color .35s}
+  .scard:hover{transform:translateY(-5px);border-color:#4b3a66}
+  .simg{height:300px;background:radial-gradient(70% 70% at 50% 50%,#1e1e1f 50%,transparent 100%),radial-gradient(90% 90% at 70% 10%,rgba(168,85,247,.14),transparent 60%),#1a1a1d;display:flex;align-items:center;justify-content:center;gap:10px;padding:18px;overflow:hidden}
+  .simg img{max-height:100%;max-width:100%;object-fit:contain;transition:transform .7s var(--ease)}
+  .simg img.s2{max-width:58%;height:auto}
+  .simg img:not(.s2):only-child{height:100%}
+  .scard:hover .simg img{transform:scale(1.04)}
+  .sb{padding:26px 28px 28px;display:flex;flex-direction:column;flex:1}
+  .sb h4{color:#fff;font-size:24px;font-weight:800;margin-top:12px}
+  .sb p{font-size:14.5px;line-height:1.75;margin-top:8px}
+  .sb .kpis{margin-top:16px}
+  .sb .kpis div b{font-size:22px}
+  .stack{margin-top:14px;font-size:12px;color:var(--p1)}
+
+  footer{border-top:1px solid var(--line2);padding:28px 0;color:var(--muted);font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center}
+  footer .logo{font-size:20px}
+
+  @media (max-width:1024px){
+    .hello,.role{font-size:56px}
+    .impact,.grid4,.pgrid{grid-template-columns:repeat(2,1fr)}
+    .flow{grid-template-columns:repeat(2,1fr);row-gap:34px}.flow-line{display:none}
+    .feature,.before-feature{grid-template-columns:1fr}
+    .feature:nth-of-type(even) .f-visual{order:0;border-right:none}
+    .f-visual{border-left:none !important;border-top:1px solid var(--line)}
+    .compact{grid-template-columns:1fr}
+    .side2{grid-template-columns:1fr}
+  }
+  @media (max-width:760px){
+    .wrap{padding:0 20px}
+    .nav-links{display:none;position:absolute;top:76px;left:0;right:0;flex-direction:column;gap:0;background:rgba(18,18,18,.96);border-bottom:1px solid var(--line2)}
+    .nav-links.open{display:flex}.nav-links a{display:block;padding:14px 24px}
+    .burger{display:block}
+    .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
+    .avatar-wrap{margin:0 auto;width:72%}
+    .hello,.role{font-size:42px}
+    .sec-title{font-size:34px}
+    .impact,.grid4,.pgrid{grid-template-columns:1fr}
+    .timeline::before{left:96px}.t-item{grid-template-columns:76px 40px 1fr}.t-year{font-size:20px}
+    .bigword{font-size:120px}
+    .f-info{padding:30px 24px}.f-visual{padding:28px 24px}
+    .c-row{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="ambient"><div class="blob b1"></div><div class="blob b2"></div></div>
+<div class="cursor-glow" id="glow"></div>
+<div class="grain"></div>
+
+<nav id="nav">
+  <div class="wrap">
+    <a href="#top" class="logo">&lt;/&gt;</a>
+    <button class="burger" id="burger" aria-label="menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#career">Career</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="hello grad-text reveal">Hello, I'm</div>
+          <div class="role reveal d1"><span id="typed"></span><span class="caret"></span></div>
+          <p class="hero-desc reveal d2">
+            문제를 데이터로 찾고, <b>AI로 직접 만들어 배포하고</b>, 결과를 숫자로 확인하는 PM입니다.<br/>
+            번개장터 Global PM으로 검색·상품 상세·수익화를 맡아 처음부터 끝까지 굴려왔습니다.
+          </p>
+          <div class="btns reveal d3">
+            <a class="btn btn-fill" href="https://pm-portfolio-liart.vercel.app/" target="_blank">View PDF</a>
+            <a class="btn btn-line" href="https://xia-portfolio.vercel.app/pdf/xia_resume.pdf" target="_blank">Download CV</a>
+          </div>
+        </div>
+        <div class="reveal d2">
+          <div class="avatar-wrap">
+            <div class="avatar-ring"></div>
+            <div class="avatar"><img src="https://xia-portfolio.vercel.app/images/mac_xia_blur2.png" alt="Xia" /></div>
+            <div class="badge-float f1"><i></i>Bunjang Global PM</div>
+            <div class="badge-float f2"><i></i>Claude Code · Vercel · Supabase</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="impact">
+        <div class="stat reveal" data-count>
+          <div class="num"><span class="cnt" data-to="733" data-prefix="+" data-suffix="%">0</span></div>
+          <div class="lbl">일 예상 광고 수입</div>
+          <div class="src">광고 지면 확대 이후</div>
+        </div>
+        <div class="stat reveal d1">
+          <div class="num"><span class="cnt" data-to="51.6" data-dec="1" data-suffix="%">0</span><span class="from">← 3.0%</span></div>
+          <div class="lbl">직접 만든 신규 서비스 전환율</div>
+          <div class="src">2차 소규모 테스트</div>
+        </div>
+        <div class="stat reveal d2">
+          <div class="num"><span class="cnt" data-to="1.86" data-dec="2" data-suffix="%">0</span><span class="from">← 6.75%</span></div>
+          <div class="lbl">결과 없는 검색 비율</div>
+          <div class="src">검색 결과 확장 A/B 테스트</div>
+        </div>
+        <div class="stat reveal d3">
+          <div class="num"><span class="cnt" data-to="55.2" data-dec="1" data-prefix="+" data-suffix="%">0</span></div>
+          <div class="lbl">추천을 거친 상품 상세 조회</div>
+          <div class="src">추천 로직 교체 이후</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="about-img reveal" id="tilt"><img src="https://xia-portfolio.vercel.app/images/programming.png" alt="about" /></div>
+      <div class="about-text">
+        <div class="eyebrow reveal">About</div>
+        <h2 class="sec-title reveal d1">About Me</h2>
+        <p class="lead reveal d1">플레이어 겸 설계자, 시스템으로 성장을 만드는 PM</p>
+        <p class="reveal d1">프론트엔드 개발자로 시작해 PM이 됐고, 지금은 <b>번개장터 Global PM</b>으로 해외 유저의 검색부터 구매까지를 맡고 있습니다. 이전에는 의료관광 플랫폼을 0→1로 기획하고 직접 개발했고, 사이드 프로젝트에서는 4인 팀을 이끌어 2주 만에 앱을 출시했습니다.</p>
+        <p class="reveal d2">기획서에서 멈추지 않고, 필요하면 프로토타입과 대시보드, 자동화 봇까지 직접 만듭니다. 실패한 테스트에서는 세션 녹화를 보며 원인을 찾아 다시 고쳤습니다.</p>
+        <div class="chips-label reveal d2">Work Philosophy</div>
+        <div class="philo reveal d2">
+          <div><b>‘기획은 시야와 감이고, 개발은 근육이다.’</b><span>넓은 관점과 손발의 실행을 동시에. 현실적이고 깊은 기획을 가능하게 하는 힘</span></div>
+          <div><b>‘인공지능에게는 일을 시키고, 사람에게는 이유를 설계한다.’</b><span>AI로 반복을 줄이고, 사람과 시스템을 연결해 본질에 집중하게 만드는 역량</span></div>
+          <div><b>‘잠을 자는 시간에도 알고리즘이 일한다.’</b><span>시간을 기술로 확장하는 철학. 자동화로 효율을 만들고 중요한 일에 몰입</span></div>
+        </div>
+        <div class="chips-label reveal d3">Beyond work</div>
+        <div class="chips reveal d4">
+          <span class="chip" title="집념으로 끝까지 해내는 실행력">육상선수 출신 · 끝까지 해내는 실행력</span><span class="chip">10만 인플루언서 · 트렌드를 읽는 힘</span><span class="chip">바디프로필 모델 · 꾸준한 자기관리</span><span class="chip">경영학 전공 · 사업적 시야</span><span class="chip">SQLD</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="eyebrow reveal">How I Build</div>
+      <h2 class="sec-title reveal d1">Skill Set</h2>
+      <p class="sec-sub reveal d2">혼자서도 문제 정의부터 성과 측정까지 한 바퀴를 돌 수 있게 일합니다.</p>
+
+      <div class="flow reveal" id="flow">
+        <div class="flow-line"></div>
+        <div class="step"><div class="dot">01</div><h4>문제 찾기</h4><p>로그와 퍼널을 직접 쿼리해 문제를 숫자로 정의</p><div class="tools">SQL · Redash · Databricks</div></div>
+        <div class="step"><div class="dot">02</div><h4>설계</h4><p>1Pager, SpecDoc으로 범위와 지표를 먼저 합의</p><div class="tools">Confluence · Figma · Jira</div></div>
+        <div class="step"><div class="dot">03</div><h4>직접 만들기</h4><p>말로 설명하기 어려운 건 AI로 바로 만들어 보여줌</p><div class="tools">Claude Code · Cursor · Supabase</div></div>
+        <div class="step"><div class="dot">04</div><h4>실험·배포</h4><p>A/B 설계, 가드레일 기준, QA까지 챙겨서 배포</p><div class="tools">A/B Test · Vercel · QA</div></div>
+        <div class="step"><div class="dot">05</div><h4>성과 확인</h4><p>지표판과 알림 봇으로 매일 숫자를 지켜봄</p><div class="tools">GA4 · PostHog · Slack Bot</div></div>
+      </div>
+
+      <div class="skill-zone">
+        <div class="bigword w1">PM</div><div class="bigword w2">AI</div>
+        <div class="groups">
+          <fieldset class="group reveal"><legend>AI &amp; 빌드</legend><div class="icons" data-tools="claude:Claude Code,cursor:Cursor,vercel:Vercel,supabase:Supabase,nextdotjs:Next.js,react:React,typescript:TypeScript,python:Python"></div></fieldset>
+          <fieldset class="group reveal d1"><legend>데이터 &amp; 실험</legend><div class="icons" data-tools="SQL:SQL,redash:Redash,databricks:Databricks,googleanalytics:GA4,posthog:PostHog"></div></fieldset>
+          <fieldset class="group reveal d2"><legend>기획 &amp; 협업</legend><div class="icons" data-tools="jira:Jira,confluence:Confluence,notion:Notion,figma:Figma,slack:Slack"></div></fieldset>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREER -->
+  <section id="career">
+    <div class="wrap">
+      <div class="career-head">
+        <div><div class="eyebrow reveal">Career</div><h2 class="sec-title reveal d1">Career</h2></div>
+        <p class="sec-sub reveal d2" style="max-width:420px">마케터, 개발자, PM을 거치며 만든 경험이 지금 한 사람의 일하는 방식으로 합쳐졌습니다.</p>
+      </div>
+      <div class="timeline">
+        <div class="t-item now reveal">
+          <div class="t-year">2026</div><div class="t-dot"></div>
+          <div class="t-body"><h4>번개장터 Global PM · 검색 스쿼드 리드<em>NOW</em></h4>
+            <ul><li>검색 개선 6개 과제 배포, 검색 결과 확장 A/B 테스트 설계·분석</li><li>신규 서비스 3종을 AI로 직접 만들어 배포하고 광고·측정까지 1인 진행</li></ul></div>
+        </div>
+        <div class="t-item reveal">
+          <div class="t-year">2025</div><div class="t-dot"></div>
+          <div class="t-body"><h4>번개장터 Global PM</h4>
+            <ul><li>2025.10 입사. 일본 파트너 메루카리 연동관 운영 인수, 상품 상세 실험, 광고 수익화</li></ul>
+            <h4 style="margin-top:14px">Biconnect · Frontend Developer &amp; PM</h4>
+            <ul><li>의료관광 플랫폼 Prettying &amp; EasyMedi 0→1 기획, React 개발</li><li>4개 언어 번역 파이프라인, QA·WBS·스프린트 운영, 런칭 총괄</li></ul></div>
+        </div>
+        <div class="t-item reveal">
+          <div class="t-year">2024</div><div class="t-dot"></div>
+          <div class="t-body"><h4>SolomonAI · Data Processing Engineer<br/>1Z Lab's · Frontend Developer</h4>
+            <ul><li>Data Processing (Python, Pandas)</li><li>FrontEnd Developer (React, Next.js, Supabase)</li></ul></div>
+        </div>
+        <div class="t-item reveal">
+          <div class="t-year">2023</div><div class="t-dot"></div>
+          <div class="t-body"><h4>Samsung MultiCampus 백엔드 개발 수료<br/>1Z Lab's DevCamp</h4>
+            <ul><li>BackEnd Developer Edu (Java, Spring)</li><li>FrontEnd Developer Edu (Next.js)</li></ul></div>
+        </div>
+        <div class="t-item reveal">
+          <div class="t-year">2022</div><div class="t-dot"></div>
+          <div class="t-body"><h4>콘텐츠·광고 기획 및 제작, 마케팅</h4>
+            <ul><li>나이키, 프로스펙스, 틱톡 캠페인 운영 및 콘텐츠 제작</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="proj-head">
+        <div class="eyebrow reveal" style="justify-content:center">Projects</div>
+        <h2 class="sec-title reveal d1">My Projects</h2>
+        <div class="tabs reveal d2">
+          <button class="tab on" data-f="all">All</button>
+          <button class="tab" data-f="bunjang">Bunjang</button>
+          <button class="tab" data-f="build">AI Build</button>
+          <button class="tab" data-f="before">Before Bunjang</button>
+        </div>
+      </div>
+
+      <!-- TIER 1 -->
+      <div class="tier-label" data-tier="bunjang build">대표 프로젝트 <small>처음부터 끝까지 직접 한 일</small></div>
+
+      <article class="feature reveal" data-cat="bunjang build">
+        <div class="f-info">
+          <div class="f-tags"><span>0→1</span><span>AI Build</span><span>1인 진행</span></div>
+          <h3>신규 서비스, 혼자 만들고<br/>실패에서 원인을 찾다</h3>
+          <p class="one">K-pop 팬을 위한 신규 서비스 아이디어 18개를 3개로 좁혀, 기획부터 개발·배포·광고·측정까지 혼자 진행했습니다.</p>
+          <div class="more">
+            <div class="f-rows">
+              <div class="f-row"><b>문제</b><span>글로벌 팬을 번개장터로 데려올 새로운 진입점이 필요했음</span></div>
+              <div class="f-row"><b>한 것</b><span>Claude Code, Vercel, Supabase로 프로토타입을 직접 만들어 배포. GA4·PostHog로 측정 설계, 광고 집행까지 진행</span></div>
+              <div class="f-row"><b>반전</b><span>1차 테스트 굿즈 클릭률 2.23%로 부진. 세션 녹화를 보다가 "광고에서 본 아이돌이 첫 화면에 없으면 바로 나간다"는 원인을 찾아 첫 화면을 고침</span></div>
+              <div class="f-row"><b>결과</b><span>광고비 0원으로 진행한 소규모 2차 테스트에서 클릭률 25.8%, 글로벌번장 전환율 3.0% → 51.6%</span></div>
+              <div class="f-row ai"><b>AI 활용</b><span>기획 → 코드 → 배포 → 분석 연동까지 AI 코딩 도구로 1인 완주</span></div>
+            </div>
+            <div class="f-note">* 2차 테스트는 광고비 0원 소규모 테스트 결과입니다.</div>
+          </div>
+          <button class="toggle">자세히 보기 <span class="ar">⌄</span></button>
+        </div>
+        <div class="f-visual">
+          <div class="story"><span>아이디어 18개</span><i>→</i><span>3개 선택</span><i>→</i><span>직접 빌드·배포</span><i>→</i><span class="hl">원인 찾고 수정</span></div>
+          <div class="metric">
+            <div class="m-top"><span class="m-name">굿즈 클릭률</span><span class="m-delta">25.8%</span></div>
+            <div class="bars">
+              <div class="bar before"><span>1차</span><div class="track"><div class="fill" data-w="8.6"></div></div><span class="val">2.23%</span></div>
+              <div class="bar after"><span>2차</span><div class="track"><div class="fill" data-w="100"></div></div><span class="val">25.8%</span></div>
+            </div>
+          </div>
+          <div class="metric">
+            <div class="m-top"><span class="m-name">글로벌번장 전환율</span><span class="m-delta">51.6%</span></div>
+            <div class="bars">
+              <div class="bar before"><span>Before</span><div class="track"><div class="fill" data-w="5.8"></div></div><span class="val">3.0%</span></div>
+              <div class="bar after"><span>After</span><div class="track"><div class="fill" data-w="100"></div></div><span class="val">51.6%</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature reveal" data-cat="bunjang">
+        <div class="f-info">
+          <div class="f-tags"><span>Squad Lead</span><span>Data</span><span>A/B Test</span></div>
+          <h3>검색 로그 8.4만 건에서<br/>찾은 진짜 문제</h3>
+          <p class="one">해외 유저가 검색해도 원하는 상품을 못 찾는 문제를 맡아, 문제 정의부터 6개 과제 배포와 A/B 테스트까지 스쿼드를 이끌었습니다.</p>
+          <div class="more">
+            <div class="f-rows">
+              <div class="f-row"><b>문제</b><span>로그 8.4만 건을 직접 분류해 보니, 한국어 상품명과 정확히 일치해야만 결과가 나오는 구조가 핵심 원인</span></div>
+              <div class="f-row"><b>한 것</b><span>특수문자 허용, 자동완성, 필터, 검색 결과 확장 등 6개 과제 배포. 결과 확장은 A/B 테스트로 검증 후 전체 배포</span></div>
+              <div class="f-row"><b>결과</b><span>결과 없는 검색 6.75% → 1.86%, 결과 10개 이하 검색의 검색당 클릭 +13.2%</span></div>
+              <div class="f-row"><b>판단</b><span>기존 지표가 로깅 변경과 봇 트래픽으로 흔들리는 걸 발견해 지표판을 새로 구축. A/B 그룹 간 사전 차이까지 확인한 뒤 결과 공유</span></div>
+              <div class="f-row ai"><b>AI 활용</b><span>AI로 지표판 쿼리와 대시보드를 직접 만들고, 자동 알림 봇으로 매일 모니터링</span></div>
+            </div>
+          </div>
+          <button class="toggle">자세히 보기 <span class="ar">⌄</span></button>
+        </div>
+        <div class="f-visual">
+          <div class="story"><span>로그 8.4만 건 분류</span><i>→</i><span>문제 정의</span><i>→</i><span>6개 과제 배포</span><i>→</i><span class="hl">A/B 검증</span></div>
+          <div class="metric">
+            <div class="m-top"><span class="m-name">결과 없는 검색 비율 (낮을수록 좋음)</span><span class="m-delta">-72%</span></div>
+            <div class="bars">
+              <div class="bar before"><span>Before</span><div class="track"><div class="fill" data-w="100"></div></div><span class="val">6.75%</span></div>
+              <div class="bar after"><span>After</span><div class="track"><div class="fill" data-w="27.6"></div></div><span class="val">1.86%</span></div>
+            </div>
+          </div>
+          <div class="metric">
+            <div class="m-top"><span class="m-name">결과 10개 이하 검색의 검색당 클릭</span><span class="m-delta">+13.2%</span></div>
+            <div class="bars">
+              <div class="bar before"><span>대조군</span><div class="track"><div class="fill" data-w="88.3"></div></div><span class="val">기준</span></div>
+              <div class="bar after"><span>실험군</span><div class="track"><div class="fill" data-w="100"></div></div><span class="val">+13.2%</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature reveal" data-cat="bunjang build">
+        <div class="f-info">
+          <div class="f-tags"><span>Revenue</span><span>Guardrail</span><span>Slack Bot</span></div>
+          <h3>수익 0원이던 지면에<br/>광고 수익을 만들다</h3>
+          <p class="one">하루 약 7만 PV가 있는데도 광고 수익이 거의 0이던 글로벌웹에, 계약 없이 바로 붙일 수 있는 방법부터 시작했습니다.</p>
+          <div class="more">
+            <div class="f-rows">
+              <div class="f-row"><b>문제</b><span>트래픽은 있는데 수익화가 전혀 안 되고 있었음</span></div>
+              <div class="f-row"><b>한 것</b><span>Google AdSense를 먼저 연동한 뒤 광고 지면 확대, 광고가 안 채워질 때 자체 배너를 띄우는 기능까지 기획</span></div>
+              <div class="f-row"><b>결과</b><span>일 예상 광고 수입 +733%, 광고 클릭 +663%, CTR 0.041% → 0.123%</span></div>
+              <div class="f-row"><b>판단</b><span>광고가 구매를 방해하지 않도록 즉시 이탈·구매하기 클릭 기준을 미리 정함. 기준을 넘은 날 없이 운영</span></div>
+              <div class="f-row ai"><b>AI 활용</b><span>슬랙 모니터링 봇을 직접 만들어 가드레일 지표를 매일 자동 확인</span></div>
+            </div>
+          </div>
+          <button class="toggle">자세히 보기 <span class="ar">⌄</span></button>
+        </div>
+        <div class="f-visual">
+          <div class="story"><span>7만 PV · 수익 0</span><i>→</i><span>AdSense</span><i>→</i><span>지면 확대</span><i>→</i><span class="hl">봇 감시</span></div>
+          <div class="metric">
+            <div class="m-top"><span class="m-name">광고 CTR</span><span class="m-delta">3×</span></div>
+            <div class="bars">
+              <div class="bar before"><span>Before</span><div class="track"><div class="fill" data-w="33.3"></div></div><span class="val">0.041%</span></div>
+              <div class="bar after"><span>After</span><div class="track"><div class="fill" data-w="100"></div></div><span class="val">0.123%</span></div>
+            </div>
+          </div>
+          <div class="metric">
+            <div class="m-top"><span class="m-name">일 예상 광고 수입 · 광고 클릭</span><span class="m-delta">+733%</span></div>
+            <div class="bars">
+              <div class="bar after"><span>수입</span><div class="track"><div class="fill" data-w="100"></div></div><span class="val">+733%</span></div>
+              <div class="bar after"><span>클릭</span><div class="track"><div class="fill" data-w="90.4"></div></div><span class="val">+663%</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- TIER 2 -->
+      <div class="tier-label" data-tier="bunjang build">더 해낸 일 <small>숫자로 확인한 개선</small></div>
+      <div class="grid4">
+        <div class="card reveal" data-cat="bunjang">
+          <div class="k">+47%</div><div class="kl">결제 중 찜 기여도 11.58% → 17.04%</div>
+          <h4>상품 상세·리스트 전환 개선</h4>
+          <p>추천 로직을 글로벌 전용으로 교체(추천 경유 조회 +55.2%), 상단 정보 재구성 A/B 테스트(결제완료율 2.48% → 2.61%), 리스트 찜 기능 추가.</p>
+          <div class="ctag">PDP · A/B Test</div>
+        </div>
+        <div class="card reveal d1" data-cat="bunjang">
+          <div class="k">3.5% <span style="font-size:18px;color:var(--muted)">vs</span> 74%</div><div class="kl">카테고리 내 클릭 vs 검색으로 이동 후 클릭</div>
+          <h4>스타굿즈 카테고리 개편</h4>
+          <p>카테고리를 직접 재보니 유저는 카테고리가 아니라 검색으로 상품을 찾고 있었음. 이를 근거로 검색 필터 중심의 화면 설계를 제안.</p>
+          <div class="ctag">Data · IA</div>
+        </div>
+        <div class="card reveal d2" data-cat="bunjang build">
+          <div class="k">0.07%</div><div class="kl">398개 카테고리 정리로 잃는 주문</div>
+          <h4>해외배송 불가 품목 정리</h4>
+          <p>프록시사별 배송 불가 카테고리를 전수 조사해 미노출 처리. 관리용 카테고리 페이지를 직접 만들어 운영 부담을 줄임.</p>
+          <div class="ctag">Ops · Tools-Web</div>
+        </div>
+        <div class="card reveal d3" data-cat="bunjang">
+          <span class="live">진행 중</span>
+          <div class="k">New</div><div class="kl">2026.10 배포, 성과 측정 중</div>
+          <h4>이미지 검색</h4>
+          <p>텍스트로 찾기 어려운 굿즈를 사진으로 찾을 수 있도록 웹에 이미지 검색을 도입. 로깅과 지표 설계부터 함께 진행.</p>
+          <div class="ctag">Search · New Feature</div>
+        </div>
+      </div>
+
+      <!-- TIER 3 -->
+      <div class="tier-label" data-tier="bunjang build">그 외 <small>짧게 정리</small></div>
+      <div class="compact">
+        <div class="c-row reveal" data-cat="bunjang"><b>파트너 협업</b><p>일본 메루카리 연동관 운영 인수. 프로모션, 금지어 관리, 상품 연동 장애 원인 추적, 계약서 번역·검토 대응</p></div>
+        <div class="c-row reveal" data-cat="bunjang build"><b>자동화 도구</b><p>슬랙 모니터링 봇, 검색 자동 알림 봇, 가격대별 상품 자동 분류, 핵심 지표 대시보드를 직접 제작</p></div>
+        <div class="c-row reveal" data-cat="bunjang build"><b>AI 확산</b><p>사내 AI 스터디 운영, 신규 서비스 AI 활용 사례 공유, 사용자 경험 원칙 워크샵 참여</p></div>
+        <div class="c-row reveal" data-cat="bunjang"><b>진행 중</b><p>쿠폰 자동적용 등 구매 유도 실험, 장바구니 일원화 실험, 일본 B2C 상점 연동, 온보딩 재설계</p></div>
+      </div>
+
+      <!-- BEFORE -->
+      <div class="tier-label" data-tier="before">Before Bunjang <small>개발자 겸 PM 시절</small></div>
+
+      <article class="feature reveal" data-cat="before">
+        <div class="f-info">
+          <div class="f-tags"><span>0→1</span><span>PM + FE</span><span>다국어 · 4채널</span></div>
+          <h3>Prettying &amp; EasyMedi<br/><span class="sub">환자·병원·에이전트가 함께 크는 의료관광 플랫폼</span></h3>
+          <p class="one">한국에서 성형을 고민하는 해외 환자를 위한 정보·상담·예약 플랫폼. 시장 조사부터 기획, 개발, 런칭, 운영 자동화까지 맡았습니다.</p>
+          <div class="deliv"><span>시장 조사 리포트</span><span>요구사항정의서·기능명세서</span><span>플로우차트·IA</span><span>와이어프레임·웹 프로토타입</span><span>QA TestCase</span><span>WBS·리스크 시트</span></div>
+          <div class="more">
+            <div class="f-rows">
+              <div class="f-row"><b>문제</b><span>환자는 언어·정보·신뢰 문제로, 병원은 해외 환자 확보의 한계로, 에이전트는 노력 대비 보상이 불투명한 구조로 각자 불편을 겪고 있었음</span></div>
+              <div class="f-row"><b>방향</b><span>한국어 마스터 DB + 다국어 번역 파이프라인 / 상담 신청과 예약 확정을 분리해 법적·운영 안정성 확보 / 에이전트 기여도 트래킹과 성과 기반 정산</span></div>
+              <div class="f-row"><b>0→1 기획</b><span>해외 사용자 분석, 화면·데이터 단위까지 내려간 명세서, 웹 프로토타입 직접 제작으로 개발 착수 전 문제 30% 이상 사전 제거</span></div>
+              <div class="f-row"><b>고도화</b><span>개인화 홈 화면, 친구와 함께 신청하면 할인이 커지는 공동구매 이벤트, 셀카 기반 AI 견적 테스트</span></div>
+              <div class="f-row"><b>PM 운영</b><span>시나리오별 TestCase, WBS 기반 일정·리스크 관리와 2주 스프린트, 런칭 리허설로 예정된 일정 안에 글로벌 서비스 공개</span></div>
+              <div class="f-row"><b>개발</b><span>병원·에이전트·관리자를 한 곳에서 관리하는 React 백오피스, 반응형 기업 홈페이지, 재사용 UI 컴포넌트</span></div>
+              <div class="f-row ai"><b>자동화</b><span>마스터 DB + Google Sheets + 번역 API로 업데이트 → 검수 → 배포를 자동화해 4개 언어 동시 반영</span></div>
+            </div>
+          </div>
+          <button class="toggle">자세히 보기 <span class="ar">⌄</span></button>
+        </div>
+        <div class="f-visual imgv">
+          <img class="fade" src="prettying_phones.jpg" alt="Prettying 앱 화면" />
+          <div class="kgrid">
+            <div><b>-70%</b><span>번역 소요 시간</span></div>
+            <div><b>+30%</b><span>QA 오류 발견율</span></div>
+            <div><b>-50%</b><span>탐색에 필요한 사용자 행동</span></div>
+            <div><b>+15%</b><span>이벤트 전환율 (최대)</span></div>
+          </div>
+        </div>
+      </article>
+
+      <div class="sub-label" data-tier="before">사이드 프로젝트</div>
+      <div class="side2">
+        <div class="scard reveal" data-cat="before">
+          <div class="simg"><img class="fade" src="poolog_phones.jpg" alt="PooLog" /><img class="s2 fade" src="poolog_dashboard.jpg" alt="PooLog 대시보드" /></div>
+          <div class="sb">
+            <div class="f-tags"><span>0→1</span><span>팀 리딩</span><span>앱스토어 출시</span></div>
+            <h4>PooLog</h4>
+            <p>민망해서 기록하지 않던 배변 활동을 재미있게 기록하는 헬스케어 앱. 인터뷰와 설문을 직접 설계하고, 개발·디자인 4인 팀을 이끌었습니다. 의학적 정확성을 위해 의료진 자문을 받고 브리스톨 변 차트를 적용했습니다.</p>
+            <div class="kpis"><div><b>2주</b>MVP 완성·출시</div><div><b>20+300명</b>심층 인터뷰 + 설문</div><div><b>70%+</b>UX 긍정 피드백</div></div>
+            <div class="stack">React Native · Firebase · GA4</div>
+          </div>
+        </div>
+        <div class="scard reveal d1" data-cat="before">
+          <div class="simg"><img class="fade" src="fitmate_phones.jpg" alt="Fit-Mate" /></div>
+          <div class="sb">
+            <div class="f-tags"><span>0→1</span><span>시장 검증</span></div>
+            <h4>Fit-Mate</h4>
+            <p>운동 스타일과 목표가 맞는 파트너를 연결하는 소셜 피트니스 앱. 피트니스 앱의 30일 유지율이 약 20%에 그친다는 점에서 출발해, 혼자가 아닌 함께 하는 운동으로 꼴준함을 만들고자 했습니다.</p>
+            <div class="kpis"><div><b>100명</b>설문 직접 진행</div><div><b>70%</b>파트너 매칭 필요</div><div><b>87%</b>사용 의향</div></div>
+            <div class="stack">PM · Frontend Developer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-label" data-tier="before build">개발 프로젝트</div>
+      <div class="pgrid" id="pgrid"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <div class="eyebrow">Contact</div>
+        <h4>Let's Connect</h4>
+        <p class="cdesc">같이 풀고 싶은 문제가 있다면 언제든 편하게 연락 주세요. 궁금한 점이든 가벼운 인사든 꼭 답장 드릴게요.</p>
+        <div class="socials">
+          <a href="https://github.com/uxia0812" target="_blank" aria-label="GitHub"><img src="https://xia-portfolio.vercel.app/_next/static/media/github_icon.a0c5894e.svg" alt="GitHub"/></a>
+          <a href="https://www.linkedin.com/in/youjeong-jang-6bb368214/" target="_blank" aria-label="LinkedIn"><img src="https://xia-portfolio.vercel.app/_next/static/media/linkedin_icon.b5af0835.svg" alt="LinkedIn"/></a>
+          <a href="https://www.notion.so/Backend-TIL-Noted-52aad819f3844724929870e35708b7ee?pvs=4" target="_blank" aria-label="Notion"><img src="https://xia-portfolio.vercel.app/_next/static/media/notion_icon.4a3c2c01.svg" alt="Notion"/></a>
+          <a href="https://xia-it.tistory.com/" target="_blank" aria-label="Blog"><img src="https://xia-portfolio.vercel.app/_next/static/media/blog_icon.6d60247d.svg" alt="Blog"/></a>
+        </div>
+      </div>
+      <form class="reveal d1" id="cform">
+        <div class="fld"><label for="em">Your Email</label><input id="em" type="email" placeholder="Please enter your email" required /></div>
+        <div class="fld"><label for="sj">Subject</label><input id="sj" placeholder="Please send any questions" required /></div>
+        <div class="fld"><label for="ms">Message</label><textarea id="ms" placeholder="Let's talk about.."></textarea></div>
+        <button class="btn btn-fill send" type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span class="logo">&lt;/&gt;</span><span>© 2026 Xia. All rights reserved.</span></div></footer>
+<div class="toast" id="toast">시안 페이지라 실제로 전송되지는 않아요.</div>
+
+<script>
+// ---------- Dev projects (from existing site) ----------
+const IMG = 'https://xia-portfolio.vercel.app/images/projects/';
+const devProjects = [
+  {t:'EasyMedi Agent Management', d:'에이전트 백오피스: 온보딩, 상담 파이프라인, 정산 대시보드', img:'AgentPage.png', url:'https://www.easymedi.net/agent/login', cat:'before'},
+  {t:'EasyMedi Landing Page', d:'에이전트 대상 서비스 소개 랜딩', img:'LandingPage.png', url:'https://www.easymedi.net/start', cat:'before'},
+  {t:'Prettying Hospital Info', d:'SEO 최적화 병원 정보 웹', img:'prettying_web.png', url:'https://prettyingweb.vercel.app/', cat:'before'},
+  {t:'Hospital Info Page', d:'제휴 병원 관리 어드민', img:'hospital_info.png', url:'https://hospital-list.vercel.app/', cat:'before'},
+  {t:'Data Processing', d:'AI 학습용 Python 데이터 처리', img:'solomon_ai.png', url:'#', cat:'before'},
+  {t:'MBTI Bot', d:'MBTI 기반 맞춤 조언 상담 봇', img:'mbti-bot.png', url:'https://mbti-bot.vercel.app/', cat:'before build'},
+];
+const pg = document.getElementById('pgrid');
+devProjects.forEach((p,i)=>{
+  const el = document.createElement('a');
+  el.className = 'pcard reveal d'+(i%4); el.dataset.cat = p.cat; el.href = p.url; el.target = '_blank';
+  el.innerHTML = `<div class="pimg"><img loading="lazy" src="${IMG+p.img}" alt="${p.t}"><div class="ov"><span>View →</span></div></div><div class="pb"><h5>${p.t}</h5><p>${p.d}</p></div>`;
+  pg.appendChild(el);
+});
+
+// ---------- Tool icons ----------
+document.querySelectorAll('.icons').forEach(box=>{
+  box.dataset.tools.split(',').forEach(pair=>{
+    const [slug,label] = pair.split(':');
+    const t = document.createElement('div'); t.className='tool';
+    const isText = slug === 'SQL';
+    const src = slug === 'slack' ? 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg' : `https://cdn.simpleicons.org/${slug}`;
+    t.innerHTML = `<div class="ic">${isText?'<span>SQL</span>':`<img src="${src}" alt="${label}" onerror="this.outerHTML='<span>${label.slice(0,2)}</span>'">`}</div><small>${label}</small>`;
+    box.appendChild(t);
+  });
+});
+
+// ---------- Typing roles ----------
+const roles = ['Builder PM','Product Manager','AI Builder'];
+const typed = document.getElementById('typed');
+let ri=0, ci=0, del=false;
+(function type(){
+  const w = roles[ri];
+  typed.textContent = w.slice(0, ci);
+  if(!del && ci < w.length){ ci++; setTimeout(type, 90); }
+  else if(!del){ del = true; setTimeout(type, 1800); }
+  else if(ci > 0){ ci--; setTimeout(type, 45); }
+  else { del = false; ri = (ri+1)%roles.length; setTimeout(type, 300); }
+})();
+
+// ---------- Reveal + counters + bars ----------
+const countUp = el=>{
+  const to = parseFloat(el.dataset.to), dec = +(el.dataset.dec||0), pre = el.dataset.prefix||'', suf = el.dataset.suffix||'';
+  const t0 = performance.now(), dur = 1600;
+  const step = now=>{ const p = Math.min(1,(now-t0)/dur), e = 1-Math.pow(1-p,3);
+    el.textContent = pre + (to*e).toFixed(dec) + suf; if(p<1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+};
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const el = e.target; el.classList.add('in');
+    el.querySelectorAll('.cnt').forEach(countUp);
+    el.querySelectorAll('.fill').forEach(f=>{ setTimeout(()=>f.style.width = f.dataset.w+'%', 250); });
+    io.unobserve(el);
+  });
+},{threshold:.18});
+document.querySelectorAll('.reveal,.stat,.flow').forEach(el=>io.observe(el));
+
+// ---------- Feature toggles ----------
+document.querySelectorAll('.feature .toggle').forEach(b=>b.addEventListener('click',()=>{
+  const f = b.closest('.feature'); f.classList.toggle('open');
+  b.firstChild.textContent = f.classList.contains('open') ? '접기 ' : '자세히 보기 ';
+}));
+
+// ---------- Project filter ----------
+document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on')); tab.classList.add('on');
+  const f = tab.dataset.f;
+  document.querySelectorAll('#projects [data-cat], #projects [data-tier]').forEach(el=>{
+    const cats = (el.dataset.cat || el.dataset.tier).split(' ');
+    el.classList.toggle('hide', !(f==='all' || cats.includes(f)));
+    if(!el.classList.contains('hide')) el.classList.add('in');
+  });
+  document.querySelectorAll('#projects .fill').forEach(x=>x.style.width = x.dataset.w+'%');
+}));
+
+// ---------- Nav state ----------
+const nav = document.getElementById('nav');
+const links = [...document.querySelectorAll('.nav-links a')];
+const secs = links.map(a=>document.querySelector(a.getAttribute('href')));
+addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled', scrollY > 20);
+  let cur = -1; secs.forEach((s,i)=>{ if(s.getBoundingClientRect().top < innerHeight*.4) cur = i; });
+  links.forEach((a,i)=>a.classList.toggle('active', i===cur));
+},{passive:true});
+document.getElementById('burger').onclick = ()=>document.getElementById('navLinks').classList.toggle('open');
+links.forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+
+// ---------- Cursor glow + tilt ----------
+const glow = document.getElementById('glow');
+addEventListener('pointermove',e=>{ glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px'; },{passive:true});
+const tilt = document.getElementById('tilt');
+tilt.addEventListener('pointermove',e=>{ const r = tilt.getBoundingClientRect(); const x = (e.clientX-r.left)/r.width-.5, y = (e.clientY-r.top)/r.height-.5;
+  tilt.style.transform = `perspective(900px) rotateY(${x*8}deg) rotateX(${-y*8}deg)`; });
+tilt.addEventListener('pointerleave',()=>tilt.style.transform='');
+
+// ---------- Form ----------
+document.getElementById('cform').addEventListener('submit',e=>{ e.preventDefault(); const t = document.getElementById('toast'); t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2600); });
+</script>
+</body>
+</html>
