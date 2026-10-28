@@ -355,6 +355,11 @@
   .acc-kpis span{display:block;font-size:12px;color:var(--muted);margin-top:3px;line-height:1.5}
   .acc-kpis.k3{grid-template-columns:repeat(3,1fr)}
   @media (max-width:760px){.acc-kpis.k3{grid-template-columns:1fr}}
+  .csteps{display:grid;gap:6px;margin-top:14px}
+  .csteps span{display:flex;align-items:flex-start;gap:8px;font-size:13px;line-height:1.55;color:var(--text)}
+  .csteps i{flex:none;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:700;color:#fff;background:var(--grad2);margin-top:1px}
+  .cchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+  .cchips span{font-size:12px;padding:3px 9px;border-radius:999px;border:1px solid var(--line2);color:var(--text);background:rgba(255,255,255,.02)}
   .acc-dates{margin-top:12px;font-size:12px;color:var(--muted)}
   @media (max-width:760px){.acc-wrap{padding:24px 18px}.acc-item summary{grid-template-columns:1fr 22px}.acc-d,.acc-c{display:none}.grid4.two{grid-template-columns:1fr}}
 
@@ -791,7 +796,7 @@
       </article>
 
       <!-- TIER 2 -->
-      <div class="tier-label" data-tier="bunjang build">더 해낸 일 <small>숫자로 확인한 개선</small></div>
+      <div class="tier-label" data-tier="bunjang build">더 해낸 일 <small>구매 경험과 운영을 함께 개선</small></div>
       <div class="grid4 two">
         <div class="card reveal" data-cat="bunjang">
           <div class="k">+47%</div><div class="kl">결제 중 찜 기여도 11.58% → 17.04%</div>
@@ -803,6 +808,21 @@
           <div class="k">3.5% <span style="font-size:18px;color:var(--muted)">vs</span> 74%</div><div class="kl">카테고리 내 클릭 vs 검색으로 이동 후 클릭</div>
           <h4>스타굿즈 카테고리 개편</h4>
           <p>카테고리를 직접 재보니 유저는 카테고리가 아니라 검색으로 상품을 찾고 있었음. 이를 근거로 검색 필터 중심의 화면 설계를 제안.</p>
+          <div class="ctag">Data · IA</div>
+        </div>
+        <div class="card reveal" data-cat="bunjang">
+          <div class="k">39개</div><div class="kl">배송 불가 카테고리 사전 미노출 · 배송 불가 12개국 제외</div>
+          <h4>배송 제한 품목·국가 안내</h4>
+          <p>프록시사마다 다른 배송 제한 때문에 결제 후 주문이 취소되고 CS가 계속 생기던 문제를, 구매 여정 3단계로 막아 유저 불만과 주문 취소를 줄였습니다.</p>
+          <div class="csteps"><span><i>1</i>주문서에 프록시사별 제한 품목 가이드</span><span><i>2</i>배송 불가 39개 카테고리를 검색·추천 등 전 노출 경로에서 제외</span><span><i>3</i>주문서 바텀시트 FAQ, 가입 시 배송 국가 수집</span></div>
+          <div class="ctag">Ops · 구매 경험</div>
+        </div>
+        <div class="card reveal d1" data-cat="bunjang">
+          <span class="live">진행 중</span>
+          <div class="k">6 + 8</div><div class="kl">홈 상단 카테고리 6개 · 인기 컬렉션 8개</div>
+          <h4>홈 카테고리 재설계</h4>
+          <p>홈에서 우리 상품부터 보고 탐색을 시작할 수 있도록, 유저의 탐색·구매·검색 데이터를 바탕으로 유저 특성에 맞는 카테고리관을 새로 만들고 있습니다. 구매액 비중이 가장 큰 트레이딩 카드(18.9%, 객단가 $293)를 첫 칸에 두는 식으로 데이터가 순서를 정했습니다.</p>
+          <div class="cchips"><span>Trading Cards</span><span>Boy Group</span><span>Girl Group</span><span>Anime &amp; Games</span><span>Webtoons &amp; WebNovels</span><span>Fashion</span></div>
           <div class="ctag">Data · IA</div>
         </div>
         
