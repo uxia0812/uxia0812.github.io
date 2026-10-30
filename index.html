@@ -364,6 +364,50 @@
   .nb-ex span{font-size:12px;padding:3px 9px;border-radius:8px;background:rgba(18,18,18,.6);border:1px solid var(--line2);color:var(--text)}
   .nb-ex b{color:#fff;font-weight:700;margin-left:3px}
   .nb-ex em{font-style:normal;font-size:12px;color:var(--p1)}
+  .one b.em{color:#fff;font-weight:700;background:linear-gradient(transparent 62%,rgba(236,72,153,.35) 62%)}
+  .f-info .one + .one{margin-top:10px}
+  /* mapping viz */
+  .mapviz{margin-top:14px;padding:14px 16px;border-radius:12px;background:rgba(18,18,18,.6);border:1px solid var(--line2)}
+  .mv-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+  .mv-head span{font-size:13px;color:#fff;font-weight:600}.mv-head small{font-size:11px;color:var(--muted)}
+  .mv-row{display:grid;grid-template-columns:150px 1fr 92px;align-items:center;gap:10px;margin-top:8px}
+  .mv-k{font-size:12.5px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mv-k em{display:block;font-style:normal;font-size:10.5px;color:var(--p1)}
+  .mv-t{height:10px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden}
+  .mv-f{height:100%;width:0;min-width:3px;border-radius:inherit;background:#ec4899;transition:width 1.6s var(--ease)}
+  .mv-row.base .mv-f{background:var(--grad)}
+  .mv-v{font-size:12.5px;color:#fff;font-weight:700;text-align:right;white-space:nowrap}
+  .mv-v i{font-style:normal;font-size:11px;color:#ec4899;margin-left:3px}
+  .mv-foot{margin-top:12px;font-size:12.5px;line-height:1.65;color:var(--text)}
+  .nowbuild.main .mv-foot b{display:inline;font-size:inherit;color:#fff;margin:0;font-weight:700}
+  /* PAI blocks */
+  .pai{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:6px}
+  .pai div{border:1px solid var(--line2);border-radius:12px;padding:14px 16px;background:rgba(18,18,18,.5)}
+  .pai b{font-size:12px;letter-spacing:.12em;text-transform:uppercase;background:var(--grad2);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+  .pai p{margin-top:6px !important;font-size:13.5px !important;line-height:1.75}
+  /* pipeline viz */
+  .pipe{margin-top:16px;border:1px solid #5b4580;border-radius:16px;padding:18px 18px 16px;background:linear-gradient(160deg,rgba(168,85,247,.10),rgba(18,18,18,.6) 60%)}
+  .pipe-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+  .pipe-head b{color:#fff;font-size:14px;letter-spacing:.06em;margin-right:auto}
+  .pipe-head span{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted)}
+  .pipe-head i{width:10px;height:10px;border-radius:3px;display:inline-block}
+  .pipe-head i.auto{background:rgba(168,85,247,.5)}.pipe-head i.human{background:#ec4899}
+  .pipe-track{position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:22px}
+  .pipe-track::before{content:"";position:absolute;left:4%;right:4%;top:27px;height:2px;background:linear-gradient(90deg,#7c3aed,#ec4899);opacity:.45}
+  .pn2{position:relative;z-index:1;text-align:center;opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+  .acc-item[open] .pn2{opacity:1;transform:none}
+  .pn2:nth-child(2){transition-delay:.08s}.pn2:nth-child(3){transition-delay:.16s}.pn2:nth-child(4){transition-delay:.24s}.pn2:nth-child(5){transition-delay:.32s}.pn2:nth-child(6){transition-delay:.4s}.pn2:nth-child(7){transition-delay:.48s}
+  .pn2:not(:nth-child(7))::after{content:"→";position:absolute;right:-17px;top:16px;color:var(--p1);font-size:14px}
+  .pi{display:grid;place-items:center;width:54px;height:54px;margin:0 auto;border-radius:16px;font-size:13px;font-weight:800;color:#fff;background:#1d1a24;border:1px solid #5b4580;box-shadow:0 8px 20px -10px rgba(168,85,247,.6)}
+  .pn2.src .pi{background:#141418;border-color:var(--line2)}
+  .pn2.out .pi{background:linear-gradient(135deg,#a855f7,#ec4899);border-color:transparent}
+  .pn2 b{display:block;margin-top:10px;font-size:12.5px;color:#fff;line-height:1.4}
+  .pn2 small{display:block;margin-top:4px;font-size:11px;color:var(--muted);line-height:1.45}
+  .pipe-dot{position:absolute;top:22px;left:4%;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 14px 4px rgba(236,72,153,.7);z-index:2;animation:pipeflow 4.5s linear infinite}
+  @keyframes pipeflow{0%{left:4%;opacity:0}6%{opacity:1}94%{opacity:1}100%{left:95%;opacity:0}}
+  .pipe-loop{margin-top:14px;font-size:12px;color:var(--p1);text-align:center}
+  @media (max-width:1024px){.pipe-track{grid-template-columns:repeat(4,1fr);row-gap:18px}.pipe-track::before,.pipe-dot,.pn2::after{display:none}.pai{grid-template-columns:1fr}}
+  @media (max-width:760px){.pipe-track{grid-template-columns:repeat(2,1fr)}.mv-row{grid-template-columns:110px 1fr 74px}}
   .acc-dates{margin-top:12px;font-size:12px;color:var(--muted)}
   @media (max-width:760px){.acc-wrap{padding:24px 18px}.acc-item summary{grid-template-columns:1fr 22px}.acc-d,.acc-c{display:none}.grid4.two{grid-template-columns:1fr}}
 
@@ -660,13 +704,21 @@
         <div class="f-info">
           <div class="f-tags"><span>Squad Lead</span><span>Raw Data</span><span>Search Quality</span></div>
           <h3>검색해도 못 찾던 커머스 검색,<br/>밑바닥부터 다시 세우다</h3>
-          <p class="one">절반 넘는 검색이 상품을 하나도 누르지 않고 끝났고, 결과가 0건인 검색도 15% 가까이 됐습니다. 번역은 검색을 위한 번역이 아닌 직역이라, 언어마다 다르게 부르는 상품명이 하나도 연결돼 있지 않았습니다. 로데이터와 지표를 전부 뜯어보며 문제를 찾고 하나씩 고쳐 지금 수준까지 끌어올렸고, 지금도 계속 개선 중입니다.</p>
+          <p class="one">절반이 넘는 검색이 상품을 하나도 클릭하지 않은 채 종료됐고, 검색 결과가 0건인 <b class="em">Zero Result도 약 15%</b>에 달했습니다.</p>
+          <p class="one">원인을 추적해보니 글로벌 검색에 적용된 번역은 ‘검색을 위한 번역’이 아닌 직역 구조였고, 국가와 언어마다 다르게 불리는 작품명·캐릭터명·상품명이 서로 매핑되지 않는 문제가 있었습니다.</p>
+          <p class="one">검색 로그와 퍼널 지표를 직접 뜯어보며 실패 케이스를 유형화하고, 검색 결과 커버리지부터 번역·동의어까지 하나씩 개선했습니다. 그 결과 Zero Result를 크게 낮췄으며, 현재는 단순히 ‘결과를 보여주는 것’을 넘어 유저가 원하는 결과를 정확히 보여주는 검색 품질 개선을 이어가고 있습니다.</p>
           <div class="nowbuild main">
             <span class="nb-tag"><i></i>MAIN · A TO Z</span>
             <b>용어집·동의어 사전 자동화</b>
-            <p>같은 작품인데도 어떤 이름으로 검색하느냐에 따라 결과가 수백 건에서 1만 8천 건까지 갈렸습니다. 올해 초부터 필요성을 꾸준히 제안해 온 과제로, 큰 개발 리소스 없이도 풀 수 있는 방법을 찾아 로데이터 전수 분석과 문제 디깅부터 자동화 파이프라인까지 개발자 한 명과 함께 직접 만들었습니다.</p>
-            <div class="nb-ex"><span>aot <b>240건</b></span><span>shingeki no kyojin <b>570건</b></span><span>attack on titan <b>18,668건</b></span><em>→ 어떤 이름으로 찾아도 같은 결과로</em></div>
-            <div class="nb-map"><span>후보 자동 수집</span><em>→</em><span>자동 검증</span><em>→</em><span>검증 툴로 2차 확인</span><em>→</em><span>직접 사전·번역 업데이트</span><em>→</em><span class="hl">매주 반복</span></div>
+            <p>같은 상품인데 어떤 이름으로 검색하느냐에 따라 결과가 수백 건에서 수만 건까지 달랐습니다. 큰 개발 리소스 없이도 반복적으로 문제를 발견하고 개선할 수 있도록, 개발자 1명의 도움으로 검색 로데이터 분석부터 사전 반영까지 이어지는 자동화 파이프라인을 직접 설계·구축했습니다.</p>
+            <div class="mapviz">
+              <div class="mv-head"><span>예시 · 같은 작품 ‘진격의 거인’</span><small>글로벌 검색 결과 수</small></div>
+              <div class="mv-row base"><span class="mv-k">진격의 거인 <em>우리 상품 표기</em></span><div class="mv-t"><div class="mv-f" data-w="100"></div></div><span class="mv-v">18,668건</span></div>
+              <div class="mv-row"><span class="mv-k">shingeki no kyojin</span><div class="mv-t"><div class="mv-f" data-w="3.1"></div></div><span class="mv-v">570건 <i>3%</i></span></div>
+              <div class="mv-row"><span class="mv-k">aot</span><div class="mv-t"><div class="mv-f" data-w="1.3"></div></div><span class="mv-v">240건 <i>1%</i></span></div>
+              <div class="mv-row"><span class="mv-k">snk</span><div class="mv-t"><div class="mv-f" data-w="1.3"></div></div><span class="mv-v">235건 <i>1%</i></span></div>
+              <div class="mv-foot">해외 유저가 실제로 쓰는 이름으로는 상품의 1~3%만 찾을 수 있었습니다. <b>이름이 서로 연결(매핑)돼 있지 않았기 때문</b>이고, 목표는 어떤 이름으로 찾아도 18,668건이 나오게 하는 것입니다.</div>
+            </div>
             <div class="nb-note">1차 테스트로 2,298개 묶음 등록 (10.28) · 주간 자동 파이프라인 구축 (10.30) · 성과 측정 중</div>
           </div>
         </div>
@@ -746,15 +798,32 @@
             <details class="acc-item">
               <summary><span class="acc-t">동의어·용어집 주간 자동화 파이프라인</span><span class="acc-d">2026.10.28 ~ 10.30</span><span class="acc-c live-c">측정 중</span><span class="acc-i"></span></summary>
               <div class="acc-body">
-                <p><b>맥락</b> C2C 글로벌 리커머스에서 가장 중요한 검색이, 직역 번역과 언어별로 다른 상품명 때문에 가장 취약한 상태였습니다. 1차 대량 등록으로 큰 줄기는 잡았지만 새 아이돌·작품 이름은 계속 생기기 때문에, 사람이 로그를 뒤지는 대신 매주 자동으로 잡아내는 구조를 직접 만들었습니다.</p>
-                <p><b>구조</b> 검색 로그에서 못 찾고 다른 표기로 다시 찾은 검색을 후보로 자동 수집하고, 중복 제거·분류·이름 조사·검산까지 자동으로 돌립니다. 이후 개발자가 만들어 준 검증 툴로 한 번 더 확인하고, 사전·번역 업데이트까지 직접 할 수 있도록 파이프라인을 구축했습니다.</p>
+                <div class="pai">
+                  <div><b>Problem</b><p>같은 상품인데, 어떤 이름으로 검색하느냐에 따라 검색 결과가 수백 건에서 수만 건까지 달랐습니다. 글로벌 C2C 리커머스에서는 한국 판매자가 등록한 상품을 해외 유저가 자신의 언어로 찾아야 합니다. 하지만 같은 작품이나 상품도 국가별 공식 명칭, 현지명, 약칭 등이 달라 단순 번역만으로는 검색어와 실제 상품명을 연결하기 어려웠습니다. 특히 신규 아이돌·작품·캐릭터는 계속 등장하기 때문에 언어별 수동 등록으로는 검색 품질을 지속적으로 유지할 수 없었습니다.</p></div>
+                  <div><b>Approach</b><p>큰 개발 리소스를 투입하지 않고도 반복적으로 문제를 발견하고 개선할 수 있는 방법을 설계했습니다. 개발자 1명의 도움으로 유저 검색 로데이터 분석 → 문제 키워드 발굴 → 후보 생성 → 검증 → 사전 반영까지 이어지는 자동화 파이프라인을 구축했습니다.</p></div>
+                  <div><b>Solution</b><p>사람이 검색 로그를 일일이 디깅하는 대신, 검색 실패 신호를 기반으로 새로운 용어 후보를 매주 자동으로 발견하는 구조를 만들었습니다. 검색 로그에서 원하는 결과를 찾지 못한 뒤 다른 표현으로 재검색해 상품을 찾은 패턴을 수집하고, 이를 용어집·동의어 후보로 자동 추출합니다. 이후 중복 제거 → 검색어 분류 → 실제 명칭 및 동의어 조사 → 결과 검산 과정을 자동화하고, 개발자가 구축한 검증 툴을 통해 최종 확인한 뒤 직접 사전과 번역 데이터에 반영할 수 있도록 구성했습니다.</p></div>
+                  <div><b>Impact</b><p>일회성으로 동의어를 등록하는 데서 끝나지 않고, 새로운 검색 실패를 지속적으로 발견하고 학습할 수 있는 운영 구조를 만들었습니다. 이를 통해 신규 작품·아이돌·캐릭터처럼 계속 새롭게 등장하는 검색어에도 대응할 수 있게 되었고, PM이 직접 데이터를 기반으로 문제를 발견하고 검증해 검색 품질을 지속적으로 개선할 수 있는 기반을 구축했습니다.</p></div>
+                </div>
+                <div class="pipe">
+                  <div class="pipe-head"><b>Weekly Pipeline</b><span><i class="auto"></i>자동</span><span><i class="human"></i>검증 툴 + 직접 반영</span></div>
+                  <div class="pipe-track">
+                    <div class="pn2 src"><span class="pi">01</span><b>Search Log</b><small>글로벌 검색 로그</small></div>
+                    <div class="pn2"><span class="pi">02</span><b>실패·재검색 패턴 탐지</b><small>못 찾고 다른 표기로 재검색</small></div>
+                    <div class="pn2"><span class="pi">03</span><b>후보 수집</b><small>용어집·동의어 후보 추출</small></div>
+                    <div class="pn2"><span class="pi">04</span><b>중복 제거·분류</b><small>기존 사전·잡음 제외</small></div>
+                    <div class="pn2"><span class="pi">05</span><b>명칭/동의어 조사</b><small>공식명·현지명·약칭</small></div>
+                    <div class="pn2"><span class="pi">06</span><b>검색 결과 검산</b><small>우리 표기 결과와 비교</small></div>
+                    <div class="pn2 out"><span class="pi">07</span><b>사전·번역 반영</b><small>검증 툴 확인 후 직접 반영</small></div>
+                    <div class="pipe-dot"></div>
+                  </div>
+                  <div class="pipe-loop">↻ 매주 월요일 자동 실행 · 반영 2주 뒤 효과 측정</div>
+                </div>
                 <div class="acc-kpis">
                   <div><b>9단계</b><span>후보 수집부터 효과 확인까지<br/>6단계 자동화</span></div>
                   <div><b>2,298개</b><span>1차 테스트로 등록한<br/>한·영·일 이름 묶음</span></div>
                   <div><b>2단계 검증</b><span>자동 검산 + 검증 툴<br/>(등록 전 사람 승인)</span></div>
                   <div><b>매주</b><span>월요일 자동 실행,<br/>11.02 정식 시작</span></div>
                 </div>
-                <p><b>성과</b> 등록 2주 뒤 결과 0건·클릭 0 비율 전후 비교로 측정 중입니다.</p>
               </div>
             </details>
             <details class="acc-item">
@@ -1014,7 +1083,7 @@ const io = new IntersectionObserver(es=>{
     if(!e.isIntersecting) return;
     const el = e.target; el.classList.add('in');
     el.querySelectorAll('.cnt').forEach(countUp);
-    el.querySelectorAll('.fill').forEach(f=>{ setTimeout(()=>f.style.width = f.dataset.w+'%', 250); });
+    el.querySelectorAll('.fill,.mv-f').forEach(f=>{ setTimeout(()=>f.style.width = f.dataset.w+'%', 250); });
     io.unobserve(el);
   });
 },{threshold:.18});
