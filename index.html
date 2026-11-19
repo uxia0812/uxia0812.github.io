@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Xia's Portfolio · Builder PM</title>
+<title>Mosa's Portfolio · Builder PM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
@@ -46,7 +46,15 @@
   .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--grad);transition:width .3s var(--ease)}
   .nav-links a:hover,.nav-links a.active{color:#fff}
   .nav-links a.active::after{width:100%}
-  .burger{display:none;background:none;border:1px solid var(--line2);color:#fff;border-radius:8px;padding:6px 10px;font-size:18px;cursor:pointer}
+  nav .wrap{justify-content:flex-start}
+  nav .wrap .logo{margin-right:auto}
+  .mode{display:flex;align-items:center;margin-left:32px;padding:3px;border:1px solid var(--line2);border-radius:999px;background:rgba(18,18,18,.5);font-size:13px;font-weight:600;letter-spacing:.01em}
+  .mode span,.mode a{padding:7px 14px;border-radius:999px;line-height:1}
+  .mode span{background:var(--grad);color:#fff}
+  .mode a{color:var(--text);transition:color .2s}
+  .mode a:hover{color:#fff}
+  .mode a i{font-style:normal;opacity:.7}
+  .burger{margin-left:12px;display:none;background:none;border:1px solid var(--line2);color:#fff;border-radius:8px;padding:6px 10px;font-size:18px;cursor:pointer}
 
   section{padding:96px 0}
   .sec-title{font-size:44px;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.15}
@@ -482,7 +490,6 @@
 <nav id="nav">
   <div class="wrap">
     <a href="#top" class="logo">&lt;/&gt;</a>
-    <button class="burger" id="burger" aria-label="menu">☰</button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -490,6 +497,8 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <div class="mode" role="group" aria-label="버전 선택"><span aria-current="true">Static</span><a href="https://mosa-builder-pm-motion.vercel.app/">Motion <i>↗</i></a></div>
+    <button class="burger" id="burger" aria-label="menu">☰</button>
   </div>
 </nav>
 
@@ -513,7 +522,7 @@
         <div class="reveal d2">
           <div class="avatar-wrap">
             <div class="avatar-ring"></div>
-            <div class="avatar"><img src="https://xia-portfolio.vercel.app/images/mac_xia_blur2.png" alt="Xia" /></div>
+            <div class="avatar"><img src="https://xia-portfolio.vercel.app/images/mac_xia_blur2.png" alt="Mosa" /></div>
             <div class="badge-float f1"><i></i>Bunjang Global PM</div>
             <div class="badge-float f2"><i></i>Claude Code · Vercel · Supabase</div>
           </div>
@@ -554,7 +563,7 @@
         <h2 class="sec-title reveal d1">About Me</h2>
         <p class="lead reveal d1">플레이어 겸 설계자, 시스템으로 성장을 만드는 PM</p>
         <p class="reveal d1">프론트엔드 개발자로 시작해 PM이 됐고, 지금은 <b>번개장터 Global PM</b>으로 해외 유저의 검색부터 구매까지를 맡고 있습니다. 이전에는 의료관광 플랫폼을 0→1로 기획하고 직접 개발했고, 사이드 프로젝트에서는 4인 팀을 이끌어 2주 만에 앱을 출시했습니다.</p>
-        <p class="reveal d2">기획서에서 멈추지 않고, 필요하면 프로토타입과 대시보드, 자동화 봇까지 직접 만듭니다. 실패한 테스트에서는 세션 녹화를 보며 원인을 찾아 다시 고쳤습니다.</p>
+        <p class="reveal d2">기획서에서 멈추지 않고, 프로토타입과 대시보드, 자동화 봇까지 직접 만듭니다. 실패한 테스트나 풀리지 않는 문제 앞에서는 세션 녹화를 보고 데이터를 끝까지 파고들어, 원인을 찾아 고칠 때까지 놓지 않습니다.</p>
         <div class="chips-label reveal d2">Work Philosophy</div>
         <div class="philo reveal d2">
           <div><b>‘기획은 시야와 감이고, 개발은 근육이다.’</b><span>넓은 관점과 손발의 실행을 동시에. 현실적이고 깊은 기획을 가능하게 하는 힘</span></div>
@@ -1004,7 +1013,7 @@
   </section>
 </main>
 
-<footer><div class="wrap"><span class="logo">&lt;/&gt;</span><span>© 2026 Xia. All rights reserved.</span></div></footer>
+<footer><div class="wrap"><span class="logo">&lt;/&gt;</span><span>© 2026 Mosa. All rights reserved.</span></div></footer>
 
 <script>
 // ---------- Dev projects (from existing site) ----------
