@@ -479,7 +479,7 @@
   }
   @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}.reveal{opacity:1;transform:none}}
   #about .about-grid{align-items:start}
-  @media (min-width:1025px){#about .about-img{position:sticky;top:120px}}
+  @media (max-width:1024px){#about .about-grid{display:flex;flex-direction:column;gap:18px}.about-left{display:contents}#about .about-img{order:0}#about .about-text{order:1}.about-left>.chips-label,.about-left>.philo,.about-left>.chips{order:2;margin-top:0}}
   .str{display:grid;gap:10px;margin-top:22px}
   .str-i{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.025);border:1px solid var(--line)}
   .str-i>b{font-size:13px;color:#a855f7;font-weight:700;padding-top:2px}
@@ -565,14 +565,8 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="wrap about-grid">
-      <div class="about-img reveal" id="tilt"><img src="https://xia-portfolio.vercel.app/images/programming.png" alt="about" /></div>
-      <div class="about-text">
-        <div class="eyebrow reveal">About</div>
-        <h2 class="sec-title reveal d1">About Me</h2>
-        <p class="lead reveal d1">시장을 읽고, 직접 만들고, 숫자로 증명하는 PM</p>
-        <p class="reveal d1">번개장터 Global PM으로 해외 유저의 검색부터 구매, 수익화까지 맡고 있습니다. 시장 조사로 기회를 찾고, 전략과 실험을 설계하고, 필요한 건 AI로 직접 만들어 배포한 뒤 결과를 숫자로 확인합니다.</p>
-        <div class="reveal d2"><div class="str"><div class="str-i"><b>01</b><div><h4>시장 조사 · 전략</h4><p>시장 조사와 타겟 유저 인터뷰로 기회를 찾고, 예상 임팩트를 계산해 전략을 세웁니다.</p><em>→ 신규 서비스 전환율 3.0% → 51.6%</em></div></div><div class="str-i"><b>02</b><div><h4>수익 구조</h4><p>트래픽은 있지만 수익이 0이던 지면에, 계약 없이 바로 붙일 수 있는 광고 구조를 설계했습니다.</p><em>→ 일 예상 광고 수입 +733%</em></div></div><div class="str-i"><b>03</b><div><h4>A/B 테스트 설계</h4><p>가설, 지표, 가드레일을 먼저 정하고 실험으로 확인한 뒤에 배포합니다.</p><em>→ 검색당 클릭 +32.3% (A/B 2회 후 전체 배포)</em></div></div><div class="str-i"><b>04</b><div><h4>AI 빌드 · 자동화</h4><p>신규 서비스를 AI로 혼자 개발·배포했고, 반복되는 일은 파이프라인과 툴로 만듭니다.</p><em>→ 동의어 사전 자동화 이후 검색의 결과 0건 비율 20.4% → 11.2%</em></div></div></div></div>
-        <p class="reveal d2">맡은 범위가 아니어도 문제가 보이면 먼저 만들어 해결합니다. 여러 시트에 흩어져 있던 채널별 카테고리 노출 이력도 직접 툴로 만들어 한곳에 모았습니다.</p>
+      <div class="about-left">
+        <div class="about-img reveal" id="tilt"><img src="https://xia-portfolio.vercel.app/images/programming.png" alt="about" /></div>
         <div class="chips-label reveal d2">Work Philosophy</div>
         <div class="philo reveal d2">
           <div><b>‘인공지능에게는 일을 시키고, 사람에게는 이유를 설계한다.’</b><span>반복은 AI에게 맡기고, 사람은 왜 하는지에 집중하게 만듭니다</span></div>
@@ -583,6 +577,14 @@
           <span class="chip" title="집념으로 끝까지 해내는 실행력">육상선수 출신 · 끝까지 해내는 실행력</span><span class="chip">10만 인플루언서 · 트렌드를 읽는 힘</span><span class="chip">바디프로필 모델 · 꾸준한 자기관리</span><span class="chip">경영학 전공 · 사업적 시야</span><span class="chip">SQLD</span>
         </div>
       </div>
+      <div class="about-text">
+        <div class="eyebrow reveal">About</div>
+        <h2 class="sec-title reveal d1">About Me</h2>
+        <p class="lead reveal d1">시장을 읽고, 직접 만들고, 숫자로 증명하는 PM</p>
+        <p class="reveal d1">번개장터 Global PM으로 해외 유저의 검색부터 구매, 수익화까지 맡고 있습니다. 시장 조사로 기회를 찾고, 전략과 실험을 설계하고, 필요한 건 AI로 직접 만들어 배포한 뒤 결과를 숫자로 확인합니다.</p>
+        <div class="reveal d2"><div class="str"><div class="str-i"><b>01</b><div><h4>시장 조사 · 전략</h4><p>시장 조사와 타겟 유저 인터뷰로 기회를 찾고, 예상 임팩트를 계산해 전략을 세웁니다.</p><em>→ 신규 서비스 전환율 3.0% → 51.6%</em></div></div><div class="str-i"><b>02</b><div><h4>수익 구조</h4><p>트래픽은 있지만 수익이 0이던 지면에, 계약 없이 바로 붙일 수 있는 광고 구조를 설계했습니다.</p><em>→ 일 예상 광고 수입 +733%</em></div></div><div class="str-i"><b>03</b><div><h4>A/B 테스트 설계</h4><p>가설, 지표, 가드레일을 먼저 정하고 실험으로 확인한 뒤에 배포합니다.</p><em>→ 검색당 클릭 +32.3% (A/B 2회 후 전체 배포)</em></div></div><div class="str-i"><b>04</b><div><h4>AI 빌드 · 자동화</h4><p>신규 서비스를 AI로 혼자 개발·배포했고, 반복되는 일은 파이프라인과 툴로 만듭니다.</p><em>→ 동의어 사전 자동화 이후 검색의 결과 0건 비율 20.4% → 11.2%</em></div></div></div></div>
+        <p class="reveal d2">맡은 범위가 아니어도 문제가 보이면 먼저 만들어 해결합니다. 여러 시트에 흩어져 있던 채널별 카테고리 노출 이력도 직접 툴로 만들어 한곳에 모았습니다.</p>
+            </div>
     </div>
   </section>
 
